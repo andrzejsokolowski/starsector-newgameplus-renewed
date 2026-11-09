@@ -1,0 +1,21 @@
+id,tab,name,description,cost,stock,requiresMod,kind,target,amount,icon
+# Store items. kind: story_points / skill_points / levels / credits / commodity / special_item. stock -1 = no limit per game. requiresMod: a mod id, or empty.,,,,,,,,,,
+sp_small,Command,Story points (3),A favour owed by people you have never met.,2,-1,,story_points,,3,graphics/ngp/item_story.png
+sp_medium,Command,Story points (10),A short list of names that still answer.,5,-1,,story_points,,10,graphics/ngp/item_story.png
+sp_large,Command,Story points (30),Debts called in across a dozen systems.,10,-1,,story_points,,30,graphics/ngp/item_story.png
+sp_huge,Command,Story points (100),Half the Sector owes you something. It just does not know it yet.,20,-1,,story_points,,100,graphics/ngp/item_story.png
+skill_point,Command,Skill point,A lesson you remember learning in another life.,8,2,,skill_points,,1,graphics/ngp/item_skill.png
+level_one,Command,One level,Years of experience you somehow already have.,5,-1,,levels,,1,graphics/ngp/item_levels.png
+level_three,Command,Three levels,A career's worth of instinct.,13,-1,,levels,,3,graphics/ngp/item_levels.png
+credits_small,Logistics,Credits (50000),A forgotten account in your name.,2,-1,,credits,,50000,graphics/ngp/item_credits.png
+credits_medium,Logistics,Credits (250000),An inheritance from a captain who looked a lot like you.,8,-1,,credits,,250000,graphics/ngp/item_credits.png
+credits_large,Logistics,Credits (1000000),A fortune no auditor will ever trace.,25,-1,,credits,,1000000,graphics/ngp/item_credits.png
+supplies_small,Logistics,Supplies (100),,1,-1,,commodity,supplies,100,
+supplies_large,Logistics,Supplies (500),,4,-1,,commodity,supplies,500,
+fuel_small,Logistics,Fuel (200),,1,-1,,commodity,fuel,200,
+fuel_large,Logistics,Fuel (1000),,4,-1,,commodity,fuel,1000,
+crew_small,Logistics,Crew (50),Spacers who swear they served under you before.,1,-1,,commodity,crew,50,
+crew_large,Logistics,Crew (250),,4,-1,,commodity,crew,250,
+marines_small,Logistics,Marines (50),,2,-1,,commodity,marines,50,
+machinery_small,Logistics,Heavy machinery (100),,2,-1,,commodity,heavy_machinery,100,
+omega_core,Rare,Omega core,It was waiting for you. It says it always is.,20,1,,commodity,omega_core,1,

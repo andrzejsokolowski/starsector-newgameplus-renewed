@@ -1,0 +1,13 @@
+{
+    "masterVersionFile":"https://raw.githubusercontent.com/andrzejsokolowski/starsector-newgameplus-renewed/main/ngp_renewed.version",
+    "changelogURL":"https://raw.githubusercontent.com/andrzejsokolowski/starsector-newgameplus-renewed/main/changelog.txt",
+    "modName":"New Game Plus - Renewed",
+    "modVersion":
+    {
+        "major":0,
+        "minor":1,
+        "patch":"0"
+    },
+    "starsectorVersion":"0.98a-RC8",
+    "directDownloadURL":"https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/releases/latest/download/NewGamePlusRenewed.zip"
+}

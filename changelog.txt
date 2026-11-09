@@ -1,0 +1,7 @@
+Version 0.1.0 (2026-11-09)
+- First version.
+- Career points: 1 per level gained in any save, kept outside your saves.
+- The Ledger: a store next to your starting fleet in every new game, marked on the intel screen.
+- Store tabs Command, Logistics and Rare: story points, skill points (2 per game), levels, credits, supplies, fuel, crew, marines, heavy machinery and an Omega core (1 per game).
+- Goods are collected through a loot screen and wait in the delivery bay until taken.
+- LunaLib settings: extra career points, points per level, store price multiplier.

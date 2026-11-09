@@ -1,0 +1,3 @@
+id,trigger,conditions,script,text,options,notes
+# New Game Plus - Renewed: the Ledger hands the dialog to its own plugin.,,,,,,
+ngp_ledgerOpen,OpenInteractionDialog,$customType == ngp_ledger_station score:1000,NGP_OpenLedger,,,

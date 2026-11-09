@@ -1,0 +1,6 @@
+fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValue,maxValue,tab
+ngp_header_points,Points Header,Header,Career points,,,,,
+ngp_bonusPoints,Extra career points,Int,0,,"Added to the career points you have earned (or taken away, below zero). Use it to set your total by hand. The store of a game already in progress sees the change at once.",-100000,100000,
+ngp_pointsPerLevel,Points per level,Int,1,,"Career points paid for every level you gain, in any save. Each save pays each level once. Levels bought in the store pay nothing.",0,100,
+ngp_header_store,Store Header,Header,Store,,,,,
+ngp_costMult,Store price multiplier,Double,1.0,,"Every store price is multiplied by this, then rounded. 1.0 keeps the listed prices, 0.5 halves them, 2.0 doubles them.",0.0,10.0,
