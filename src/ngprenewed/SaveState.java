@@ -102,6 +102,28 @@ public final class SaveState {
         return fresh;
     }
 
+    @SuppressWarnings("unchecked")
+    private Map<String, Map<String, Object>> ships() {
+        Object value = map.get("ships");
+        if (value instanceof Map) return (Map<String, Map<String, Object>>) value;
+        Map<String, Map<String, Object>> fresh = new HashMap<>();
+        map.put("ships", fresh);
+        return fresh;
+    }
+
+    /** What the Ledger did to one ship (by fleet member id), made on first use. */
+    public Map<String, Object> shipRecord(String memberId) {
+        return ships().computeIfAbsent(memberId, id -> new HashMap<>());
+    }
+
+    public Map<String, Object> existingShipRecord(String memberId) {
+        return ships().get(memberId);
+    }
+
+    public boolean hasShipRecords() {
+        return !ships().isEmpty();
+    }
+
     public SectorEntityToken ledger() {
         Object value = map.get("ledger");
         return value instanceof SectorEntityToken ? (SectorEntityToken) value : null;

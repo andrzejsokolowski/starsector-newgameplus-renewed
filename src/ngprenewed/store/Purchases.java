@@ -26,6 +26,9 @@ public final class Purchases {
             LevelupPlugin plugin = Global.getSettings().getLevelupPlugin();
             if (Global.getSector().getPlayerStats().getLevel() >= plugin.getMaxLevel()) return "Already at the top";
         }
+        if ("perk".equals(item.kind) && Global.getSector().getPlayerStats().getSkillLevel(item.target) > 0) {
+            return "Already yours";
+        }
         return null;
     }
 
@@ -80,8 +83,35 @@ public final class Purchases {
                 bay.addSpecial(new SpecialItemData(item.target, null), item.amount);
                 bay.sort();
                 break;
+            case "weapon_pack":
+                for (String weaponId : StoreCatalog.packWeapons(item.target)) bay.addWeapons(weaponId, item.amount);
+                bay.sort();
+                break;
+            case "perk":
+                grantPerk(item.target);
+                break;
             default:
                 throw new IllegalStateException("unknown kind " + item.kind);
+        }
+    }
+
+    /** A perk is a hidden skill on the player, so it lasts for this game and applies to every ship. */
+    static void grantPerk(String skillId) {
+        Global.getSector().getPlayerStats().setSkillLevel(skillId, 1f);
+        Global.getSector().getPlayerStats().refreshCharacterStatsEffects();
+        Global.getSector().getPlayerFleet().getFleetData().setSyncNeeded();
+        Global.getSector().getPlayerFleet().getFleetData().syncIfNeeded();
+    }
+
+    /** Gives back any perk this game bought that the player no longer has, for example after a skill reset. */
+    public static void keepPerks(SaveState state) {
+        for (String tab : StoreCatalog.tabs()) {
+            for (StoreItem item : StoreCatalog.itemsIn(tab)) {
+                if (!"perk".equals(item.kind) || state.boughtCount(item.id) <= 0) continue;
+                if (Global.getSector().getPlayerStats().getSkillLevel(item.target) > 0) continue;
+                grantPerk(item.target);
+                log.info("New Game Plus - Renewed: gave back the perk " + item.id);
+            }
         }
     }
 

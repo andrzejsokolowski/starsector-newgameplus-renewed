@@ -1,3 +1,9 @@
+Version 0.2.0 (2026-11-10)
+- New Shipyard tab: S-mod slot (+1), D-mod removal, Stat tuning and Extra ordnance points (2 / 6 / 15 / 40 by hull size). They arrive as cargo items; right-click one to fit it to a ship.
+- Stat tuning raises one stat of your choice on one ship: hull, armor, flux capacity, flux dissipation, top speed or weapon range by 10 percent, peak performance time by 20 percent, or cuts supply use by 10 percent. Each ship can take each stat once.
+- New perk in the Logistics tab: +10 percent cargo, fuel and crew capacity for the rest of the game (10 points, once per game).
+- New Armoury tab: one weapon pack per design type with 5 or more weapons, two of each weapon. Modded design types get their own packs.
+
 Version 0.1.0 (2026-11-09)
 - First version.
 - Career points: 1 per level gained in any save, kept outside your saves.

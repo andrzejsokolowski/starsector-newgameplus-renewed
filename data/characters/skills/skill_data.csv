@@ -1,0 +1,2 @@
+id,name,order,tier,reqPoints,reqPointsPerExtraSkill,description,author,combat officer,admiral,admin,tags,icon,
+ngp_storage_perk,Ledger Holds,99100,1,0,,"Every hold in the fleet runs a little deeper than its blueprints say. No surveyor has ever found the extra space twice in the same place.",The Ledger,,,,npc_only,graphics/icons/skills/bulk_transport.png,

@@ -278,7 +278,7 @@ public class StorePanel implements CustomVisualDialogDelegate, CustomUIPanelPlug
     }
 
     private static boolean goodsGoToBay(StoreItem item) {
-        return "commodity".equals(item.kind) || "special_item".equals(item.kind);
+        return "commodity".equals(item.kind) || "special_item".equals(item.kind) || "weapon_pack".equals(item.kind);
     }
 
     private StoreItem find(String itemId) {

@@ -129,7 +129,7 @@ tasks.register('checkReleaseFiles') {
         }
 
         // Every store item must use a kind the code knows and a tab that exists.
-        def kinds = ['story_points', 'skill_points', 'levels', 'credits', 'commodity', 'special_item']
+        def kinds = ['story_points', 'skill_points', 'levels', 'credits', 'commodity', 'special_item', 'perk']
         def lines = file('data/campaign/ngp_store_items.csv').readLines('UTF-8').findAll { it.trim() && !it.startsWith('#') }
         def header = lines[0].split(',')*.trim()
         def kindCol = header.indexOf('kind')

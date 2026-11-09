@@ -16,6 +16,15 @@ next to your starting fleet. Spend your career points there on a head start.
 - **The store** has tabs and a scrolling list. Click Buy, then Confirm. Story points, skill points,
   levels and credits apply at once. Goods wait in the delivery bay and you take them through the usual
   loot screen.
+- **Shipyard:** S-mod slot (+1), D-mod removal, Stat tuning and Extra ordnance points (2 / 6 / 15 / 40
+  by hull size). They arrive as cargo items; right-click one to fit it to a ship. Stat tuning raises
+  one stat on one ship (hull, armor, flux capacity, flux dissipation, top speed or weapon range +10%,
+  peak performance time +20%, supply use -10%); each ship can take each stat once. The work shows on
+  the ship as the Ledger Refit and Ledger Mount Rails hull mods, which cannot be removed.
+- **Perk:** +10% cargo, fuel and crew capacity for the rest of the game (Logistics tab, once per game).
+- **Armoury:** one weapon pack per design type with 5 or more weapons, two of each weapon. The base
+  game's own weapons are grouped by their blueprint package (High Tech, Midline, Low Tech, Missile,
+  Common). Weapons the game never sells or drops are left out.
 
 ## Settings (LunaLib)
 
