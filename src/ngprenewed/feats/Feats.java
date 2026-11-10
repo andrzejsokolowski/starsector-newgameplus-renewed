@@ -5,9 +5,7 @@ import achievementsrenewed.api.Achievements;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.ModSpecAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
-import com.fs.starfarer.api.util.Misc;
 import ngprenewed.Career;
-import ngprenewed.SaveState;
 import ngprenewed.Settings;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -20,16 +18,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Feats: story flags that pay career points once per profile, ever (Andrzej, 2026-11-10). Read once at
- * game start from data/campaign/ngp_feats.csv, merged across mods so another mod can add lines. A feat
- * whose required mod is missing is left out.
+ * Feats: achievements that New Game Plus adds to Achievements - Renewed, read once at game start from
+ * data/campaign/ngp_feats.csv (merged across mods, so another mod can add lines). A feat whose required
+ * mod is missing is left out. Each is listed in the tab of the mod it belongs to, or in the base game tab,
+ * never in a tab of its own (Andrzej, 2026-11-10: "Aren't achievements feats?").
  *
- * Every feat is an achievement in Achievements - Renewed (Andrzej, 2026-11-10): that mod checks it,
- * records it across saves and shows it in its list. When another mod already has an achievement with
- * the same condition (the "shared" column, for example Rule Book - Renewed's rbr_atg), the feat pays on
- * that one and adds none of its own, so the list never shows the same thing twice. Which feats were paid
- * is still kept in the career file, outside every save, so the points are paid once even if the
- * achievement it pays on changes.
+ * When another mod already has an achievement with the same condition (the "shared" column, for example
+ * Rule Book - Renewed's rbr_atg), the feat adds none of its own, so the list never shows the same thing
+ * twice. Either way the feat's points are what that achievement pays. Paying is {@link Rewards}' work.
  */
 public final class Feats {
 
@@ -37,7 +33,8 @@ public final class Feats {
 
     private static final Logger log = Global.getLogger(Feats.class);
     private static final String PATH = "data/campaign/ngp_feats.csv";
-    private static final String BASE_GAME = "Base game";
+    /** Achievements - Renewed's name for its first tab, the base game one. */
+    private static final String VANILLA_TAB = "vanilla";
 
     private static final List<Feat> feats = new ArrayList<>();
     /** Achievement id the feat pays on, by feat id: its own, or the shared one. */
@@ -97,14 +94,19 @@ public final class Feats {
                     achievement = feat.shared;
                 } else {
                     achievement = feat.ownAchievementId();
-                    Achievements.register(AchievementSpec.builder(achievement, Settings.MOD_ID, feat.name)
+                    AchievementSpec.Builder spec = AchievementSpec.builder(achievement, Settings.MOD_ID, feat.name)
                             .hint(feat.hint)
                             .howTo(feat.howTo)
-                            .category(category(feat))
                             .reward("+" + feat.points + " career points")
                             .script(new FeatAchievement(feat))
-                            .order(100 + i)
-                            .build());
+                            .order(100 + i);
+                    try {
+                        // Achievements - Renewed 0.2.0 and later: the tab of the feat's mod, or the base game tab.
+                        spec.tab(feat.requiresMod.isEmpty() ? VANILLA_TAB : modName(feat.requiresMod));
+                    } catch (NoSuchMethodError old) {
+                        spec.category(feat.requiresMod.isEmpty() ? "Base game" : modName(feat.requiresMod));
+                    }
+                    Achievements.register(spec.build());
                     own++;
                 }
             } catch (Throwable t) {
@@ -118,10 +120,9 @@ public final class Feats {
                 + (achievementOf.size() - own) + " shared with other mods.");
     }
 
-    private static String category(Feat feat) {
-        if (feat.requiresMod.isEmpty()) return BASE_GAME;
-        ModSpecAPI mod = Global.getSettings().getModManager().getModSpec(feat.requiresMod);
-        return mod != null && mod.getName() != null ? mod.getName() : feat.requiresMod;
+    private static String modName(String modId) {
+        ModSpecAPI mod = Global.getSettings().getModManager().getModSpec(modId);
+        return mod != null && mod.getName() != null ? mod.getName() : modId;
     }
 
     /** org.json returns the string "null" for a JSON null, so empty cells are checked by hand. */
@@ -135,37 +136,21 @@ public final class Feats {
     }
 
     /** The feat that pays on this achievement, or null. */
-    static Feat forAchievement(String achievementId) {
+    public static Feat forAchievement(String achievementId) {
         return byAchievement.get(achievementId);
     }
 
     /**
-     * Pays every feat whose achievement is done and that the profile has never been paid for: done in
-     * another save, done before this mod was installed, or done while no save state existed yet. A feat
-     * paid before it was an achievement marks its own achievement done instead (which pays nothing).
+     * Feats paid before 0.7.0 (by feat id) whose own achievement is not done yet: marks it done, which
+     * pays nothing again.
      */
-    public static void check(SaveState state) {
+    static void markLegacyDone() {
         for (Feat feat : feats) {
             String achievement = achievementOf.get(feat.id);
-            if (achievement == null) continue;
-            boolean paid = Career.featPaid(feat.id);
-            if (Achievements.isDone(achievement)) {
-                if (!paid) pay(state, feat);
-            } else if (paid && achievement.equals(feat.ownAchievementId())) {
+            if (achievement == null || !achievement.equals(feat.ownAchievementId())) continue;
+            if (!Achievements.isDone(achievement) && Career.achievementPaid(achievement, feat.id)) {
                 Achievements.complete(achievement);
             }
-        }
-    }
-
-    /** Pays one feat if the profile has not been paid for it yet. */
-    static void pay(SaveState state, Feat feat) {
-        if (state == null || Career.featPaid(feat.id)) return;
-        int paid = Career.payFeat(state.saveId(), feat.id, feat.points);
-        log.info("New Game Plus - Renewed: feat " + feat.id + " paid " + paid + " career points.");
-        if (Global.getSector().getCampaignUI() != null) {
-            Global.getSector().getCampaignUI().addMessage(
-                    "The Ledger records your deed: +" + paid + " career points",
-                    Misc.getPositiveHighlightColor());
         }
     }
 

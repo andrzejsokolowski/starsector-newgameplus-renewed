@@ -1,0 +1,50 @@
+id,points
+# Career points for achievements of other mods; paid once per profile. Achievements a feat pays on (ngp_feats.csv) use the feat's points. Unlisted achievements pay 5; 0 pays nothing. Rule Book challenges never pay.,
+# Achievements - Renewed,
+acr_level5,5
+acr_level10,10
+acr_level15,15
+acr_systems25,5
+acr_wins10,5
+acr_wins50,10
+acr_wins200,25
+acr_remnant10,15
+acr_capital,5
+acr_automated,10
+# Rule Book - Renewed: base game,
+rbr_coureuse,5
+rbr_project_ziggurat,10
+rbr_hamatsu,5
+rbr_oddity,10
+rbr_persea,10
+rbr_pilgrim,5
+rbr_false_idols,10
+rbr_stray_flock,5
+rbr_volturn,5
+rbr_millionaire,10
+rbr_colony,5
+rbr_colony6,10
+rbr_colonies5,15
+rbr_wins,5
+rbr_giant,15
+rbr_station,10
+rbr_remnant,10
+rbr_abyss,20
+# Rule Book - Renewed: other mods,
+rbr_sol_shroud,15
+rbr_sol_reach,5
+rbr_gd_pulls,5
+rbr_gd_wins,5
+rbr_cloning,15
+rbr_cloning_supergrowth,25
+rbr_arsenal_weapons,10
+rbr_arsenal_ship,15
+rbr_starterpack,5
+rbr_contract,5
+rbr_aar_ascended,20
+rbr_aar_ecumenopolis,30
+rbr_oce_tutelage,15
+rbr_chicken,2
+rbr_chicken_market,15
+rbr_great_mall,5
+rbr_ngp_ledger,2

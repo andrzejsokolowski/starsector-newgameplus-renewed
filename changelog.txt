@@ -1,3 +1,8 @@
+Version 0.7.0 (2026-11-10)
+- Every achievement in Achievements - Renewed now pays career points once per profile, from any mod. Rule Book - Renewed challenges pay nothing.
+- Achievements you already have pay when you next load a game.
+- The feats no longer have a tab of their own: each is in the tab of its mod, the base game ones in the first tab.
+
 Version 0.6.0 (2026-11-10)
 - Now needs Achievements - Renewed.
 - Feats are achievements: they show in the achievements list with a hint and the career points they pay.

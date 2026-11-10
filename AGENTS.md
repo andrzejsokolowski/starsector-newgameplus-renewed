@@ -46,9 +46,14 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   Every feat is an achievement in Achievements - Renewed (required since 0.6.0), registered from
   code in onApplicationLoad as `ngp_<feat id>` with `FeatAchievement` as its check. Column `shared`
   names another mod's achievement with the same condition (Rule Book's `rbr_atg` and so on); when it
-  exists the feat pays on it and registers none of its own. `FeatPayer` (listener) pays at once,
-  `Feats.check` in CampaignScript pays anything missed and marks own achievements done for feats paid
-  before 0.6.0.
+  exists the feat registers none of its own. Feats sit in their mod's tab (`tab` = mod name) or the
+  `vanilla` tab, never an NGP tab.
+- `feats/Rewards` (0.7.0, Andrzej: "Aren't achievements feats?") - EVERY achievement in
+  Achievements - Renewed pays once per profile, except Rule Book challenges (`rbr_challenge_*`, or
+  category Challenges of `rulebook_renewed`), which pay nothing. Points: the feat's points, else
+  `data/campaign/ngp_achievement_points.csv`, else 5. `FeatPayer` (listener) pays at once,
+  `Rewards.check` in CampaignScript pays anything done but unpaid. Paid ids sit in career.json
+  `achievements`; the old `feats` map still counts.
 - Rule Book - Renewed's achievement `rbr_ngp_ledger` checks the fleet for hull mod id
   `ngp_ledger_refit`. Never rename it.
 - `store/StorePanel` - the store screen. All buttons in ONE tooltip element covering the whole panel

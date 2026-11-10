@@ -5,6 +5,7 @@ import com.fs.starfarer.api.Global;
 import achievementsrenewed.api.Achievements;
 import ngprenewed.feats.FeatPayer;
 import ngprenewed.feats.Feats;
+import ngprenewed.feats.Rewards;
 import ngprenewed.feats.OmegaBattleListener;
 import ngprenewed.store.StoreCatalog;
 
@@ -18,6 +19,7 @@ public class NGPModPlugin extends BaseModPlugin {
     public void onApplicationLoad() {
         StoreCatalog.load();
         Feats.load();
+        Rewards.load();
     }
 
     @Override

@@ -3,12 +3,12 @@ package ngprenewed;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.util.IntervalUtil;
-import ngprenewed.feats.Feats;
+import ngprenewed.feats.Rewards;
 import ngprenewed.ships.ShipItems;
 import ngprenewed.store.Purchases;
 
 /**
- * Runs once a second of real time: pays level and feat points, places the Ledger when it is missing, and puts
+ * Runs once a second of real time: pays level and achievement points, places the Ledger when it is missing, and puts
  * back bought perks and ship work that something took away.
  * Runs while paused so levels gained inside a dialog are noticed. Added on every load, never saved.
  */
@@ -34,7 +34,7 @@ public final class CampaignScript implements EveryFrameScript {
         if (state == null || Global.getSector().getPlayerFleet() == null) return;
         try {
             LevelTracker.payPendingLevels(state);
-            Feats.check(state);
+            Rewards.check(state);
             LedgerSpawner.ensure(state);
             Purchases.keepPerks(state);
             ShipItems.sync(state);

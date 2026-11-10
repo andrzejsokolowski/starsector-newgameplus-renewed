@@ -185,6 +185,12 @@ tasks.register('checkReleaseFiles') {
             }
         }
 
+        // Every achievement price is an id and a whole number.
+        file('data/campaign/ngp_achievement_points.csv').readLines('UTF-8').drop(1).findAll { it.trim() && !it.startsWith('#') }.each { line ->
+            def cols = parseCsv(line)
+            if (cols.size() != 2 || !cols[0] || !(cols[1] ==~ /\d+/)) problems << "Achievement price needs an id and whole points: ${line}"
+        }
+
         if (problems) throw new GradleException("Release files are not ready:\n  " + problems.join('\n  '))
         logger.lifecycle('Release files verified')
     }
