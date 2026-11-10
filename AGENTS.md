@@ -54,8 +54,9 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   `data/campaign/ngp_achievement_points.csv`, else 5. `FeatPayer` (listener) pays at once,
   `Rewards.check` in CampaignScript pays anything done but unpaid. Paid ids sit in career.json
   `achievements`; the old `feats` map still counts.
-- Rule Book - Renewed's achievement `rbr_ngp_ledger` checks the fleet for hull mod id
-  `ngp_ledger_refit`. Never rename it.
+- Rule Book - Renewed's achievement `rbr_ngp_ledger` ("Use a consumable item") reads sector memory
+  `$ngp_usedConsumable` (set by `ShipItems.apply`, 0.7.2) and, for older versions, the hull mod id
+  `ngp_ledger_refit`. Never rename either.
 - `store/StorePanel` - the store screen. All buttons in ONE tooltip element covering the whole panel
   at inTL(0,0) (offset elements never get clicks). Row text in separate button-free elements.
 - `ships/` - the Shipyard items (special items with a right-click dialog). S-mod slots and stat boosts

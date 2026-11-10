@@ -1,3 +1,6 @@
+Version 0.7.2 (2026-11-10)
+- Using any of the ship items (S-mod slot, D-mod removal, Stat tuning, Extra ordnance points) now counts for Rule Book - Renewed's achievement "Use a consumable item".
+
 Version 0.7.1 (2026-11-10)
 - New gold icon in mod managers (TriOS) and in LunaLib's settings.
 

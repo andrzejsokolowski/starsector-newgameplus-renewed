@@ -37,6 +37,11 @@ public final class ShipItems {
 
     public static final String REFIT_MOD = "ngp_ledger_refit";
     public static final String OP_MOD = "ngp_ledger_rails";
+    /**
+     * Sector memory flag, true once any of the four items was fitted in this save. Rule Book - Renewed's
+     * achievement "Use a consumable item" reads it, so keep the name.
+     */
+    public static final String USED_FLAG = "$ngp_usedConsumable";
 
     private static final String SMOD_TAG = "ngp_smod_";
 
@@ -171,6 +176,7 @@ public final class ShipItems {
                 return false;
         }
         member.updateStats();
+        Global.getSector().getMemoryWithoutUpdate().set(USED_FLAG, true);
         return true;
     }
 
@@ -220,6 +226,8 @@ public final class ShipItems {
     public static void sync(SaveState state) {
         CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
         if (fleet == null || !state.hasShipRecords()) return;
+        // Saves from before 0.7.2 that already used an item.
+        Global.getSector().getMemoryWithoutUpdate().set(USED_FLAG, true);
         for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
             Map<String, Object> record = state.existingShipRecord(member.getId());
             if (record == null || member.getVariant() == null) continue;
