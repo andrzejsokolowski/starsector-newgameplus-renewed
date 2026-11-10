@@ -1,3 +1,6 @@
+Version 0.7.1 (2026-11-10)
+- New gold icon in mod managers (TriOS) and in LunaLib's settings.
+
 Version 0.7.0 (2026-11-10)
 - Every achievement in Achievements - Renewed now pays career points once per profile, from any mod. Rule Book - Renewed challenges pay nothing.
 - Achievements you already have pay when you next load a game.
