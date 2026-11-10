@@ -64,8 +64,7 @@ public class LedgerIntel extends BaseIntelPlugin {
         }
         SaveState state = SaveState.get();
         if (state != null) {
-            info.addPara("Points to spend: %s of %s.", 10f, h,
-                    String.valueOf(state.budget()), String.valueOf(state.startingBudget()));
+            info.addPara("Points to spend: %s.", 10f, h, String.valueOf(state.budget()));
             info.addPara("Career points across all your lives: %s.", 3f, h, String.valueOf(Career.total()));
         }
     }

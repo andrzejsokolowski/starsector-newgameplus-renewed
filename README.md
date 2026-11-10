@@ -6,8 +6,8 @@ next to your starting fleet. Spend your career points there on a head start.
 ## How it works
 
 - **Career points** are kept outside your saves (in `saves/common`), so deleting saves never touches
-  them. They are never spent: every new game gets a budget equal to the career points you earned in
-  your other saves.
+  them. They are never spent: in every game you can spend up to your whole career total,
+  points earned in that game included, and the next game gets all of it again.
 - **Levels:** each level you gain pays 1 career point (LunaLib setting). Each save pays each level
   once. Levels bought in the store pay nothing. Points earned in a game go to your next games, not to
   the store of the game you earned them in.

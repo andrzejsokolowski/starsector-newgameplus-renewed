@@ -15,8 +15,8 @@ import org.json.JSONObject;
  * {@code earned} is the lifetime total. Each save keeps the highest level it has been paid for, so a
  * level is paid once per save even after reloading an older save file.</p>
  *
- * <p>Points are never spent from here. A game's store budget is a snapshot of this total taken when
- * the game starts (see {@link SaveState}).</p>
+ * <p>Points are never spent from here. A game's store budget is this total less what that game has
+ * spent (see {@link SaveState#budget()}).</p>
  */
 public final class Career {
 

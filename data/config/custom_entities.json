@@ -3,6 +3,7 @@
 		"defaultName":"Legacy Station",
 		"nameInText":"Legacy Station",
 		"shortName":"station",
+		"customDescriptionId":"ngp_legacy_station",
 		"aOrAn":"a",
 		"isOrAre":"is",
 		"defaultRadius":40,

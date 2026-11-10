@@ -21,6 +21,10 @@ public final class LedgerSpawner {
     public static final String ENTITY_TYPE = "ngp_ledger_station";
     /** The name players see (Andrzej, 2026-11-10: not "the Ledger"). */
     public static final String NAME = "Legacy Station";
+    /** descriptions.csv line the hover tooltip reads; without one the game shows no tooltip at all. */
+    public static final String DESCRIPTION_ID = "ngp_legacy_station";
+    /** Vanilla memory key: keep the system's music playing while the player talks to the station. */
+    private static final String KEEP_MUSIC = "$playLocationMusicDuringEnc";
 
     private LedgerSpawner() {
     }
@@ -62,10 +66,14 @@ public final class LedgerSpawner {
 
     /**
      * Without has_interaction_dialog the game draws the station but never lets the player click it
-     * (0.7.3 and older). Stations made before 0.7.4 also keep their old name, so both are put right here.
+     * (0.7.3 and older). Stations made before 0.7.4 also keep their old name, and before 0.7.5 they had no
+     * description (so no hover tooltip) and switched the music off for the encounter. All of it is put
+     * right here, on new and old stations alike.
      */
     private static void fixUp(SectorEntityToken station) {
         if (!station.hasTag(Tags.HAS_INTERACTION_DIALOG)) station.addTag(Tags.HAS_INTERACTION_DIALOG);
         if (!NAME.equals(station.getName())) station.setName(NAME);
+        if (!DESCRIPTION_ID.equals(station.getCustomDescriptionId())) station.setCustomDescriptionId(DESCRIPTION_ID);
+        if (!station.getMemoryWithoutUpdate().getBoolean(KEEP_MUSIC)) station.getMemoryWithoutUpdate().set(KEEP_MUSIC, true);
     }
 }

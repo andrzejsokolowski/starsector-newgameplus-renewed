@@ -13,7 +13,7 @@ Needs LunaLib and Achievements - Renewed.
 [list]
 [li]Each level you gain pays 1 career point. Each save pays each level once, even if you reload an older save file.[/li]
 [li]Career points are kept outside your saves, so deleting saves never touches them.[/li]
-[li]They are never spent. Every new game gets a budget equal to the points you earned in your other saves. Points you earn during a game go to your next games.[/li]
+[li]They are never spent. In every game you can spend up to your whole career total, points earned in that game included, and the next game gets all of it again.[/li]
 [li]Levels bought in the store pay nothing.[/li]
 [li]Feats pay once per profile, never again in any save: At the Gates 20, the Planetkiller recovered 20, an Omega fleet beaten 30, the Ziggurat defeated 20, the Galatia Academy story 10, the Usurpers 10, the Knight Errant 10, a duel won 5, Kanta's protection 5.[/li]
 [li]Feats from other mods, when installed: Hall of Triumph: Isa's masterwork 10, Gan Eden 30. Secrets of the Frontier: A Memory 15, The Wayward Star 30, A Lost Thread 10, Legacy of Hypnos 10, Annex-Barrow 15, Hope for Hallowhall 10. Random Assortment of Things: the Singularity 30. Knights of Ludd: Tri-Tachyon black site 20, Elysia 20, Dawn 15, Dusk 15. Heggie Tales 15. Sol Renewed: The Deterrent 30, Transferring Sol 5. Nexerelin: Salvation 30. Sephira Conclave: Operation Burning Storm 20. Liminal: the Liminal Crisis 20. What We Left Behind: the IAIIC crisis 30, the Omega Manufactorum 20. Domain Phase Lab: Project Prometheus 20, the Helheim Supremacy 10. Diable Avionics: the First Relay 20. Emergent Threats: A Thousand Cuts 20, Shattered Fortress 15. Halo Dynamics: the Culann mission 15. Core of Babel: Babel Protocol 15. Crab Shack: Dream No More 20. Tahlan Additions: The Elegy of Opis 15, The Illustrious 10. United Aurora Federation: Tilted Dagger 15.[/li]
@@ -60,6 +60,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.7.5[/b]
+[list][li]The store screen is rebuilt: it fills most of the screen, the list scrolls smoothly with the mouse wheel, and the tabs can be clicked.[/li][li]Points to spend are now your whole career total less what this game has spent, so points earned in the current game can be spent at once.[/li][li]Legacy Station now shows a tooltip when you hover over it.[/li][li]The system's music keeps playing while you visit Legacy Station.[/li][/list]
 [b]0.7.4[/b]
 [list][li]The store station is now called Legacy Station, and it can be clicked: before, it showed up but could not be flown to or talked to. Stations in existing saves are fixed on load.[/li][li]The other "Ledger" texts are renamed too: messages now say "Your legacy grows", and the storage perk is now Deep Holds.[/li][/list]
 [b]0.7.3[/b]

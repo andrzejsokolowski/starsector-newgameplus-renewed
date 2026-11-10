@@ -39,7 +39,7 @@ public final class SaveState {
     public static SaveState create() {
         Map<String, Object> map = new HashMap<>();
         map.put("saveId", Misc.genUID());
-        // Only points earned in other saves count: this save has earned nothing yet.
+        // Kept for older versions; the budget is now the whole career total (see budget()).
         map.put("budgetBase", Career.earned());
         map.put("spent", 0);
         map.put("bought", new HashMap<String, Integer>());
@@ -57,14 +57,14 @@ public final class SaveState {
         return value instanceof Number ? ((Number) value).intValue() : 0;
     }
 
-    /** Points the store can still spend in this game. */
+    /**
+     * Points the store can still spend in this game: the whole career total (LunaLib adjustment
+     * included) less what this game has spent. Points earned in this game count at once (0.7.5;
+     * before, only points from other saves counted, and Andrzej saw 0 to spend with 167 career points).
+     * Spending never lowers the career total, so every new game starts with all of it again.
+     */
     public int budget() {
-        return intValue("budgetBase") + Settings.bonusPoints() - intValue("spent");
-    }
-
-    /** The budget this game started with, LunaLib adjustment included. */
-    public int startingBudget() {
-        return intValue("budgetBase") + Settings.bonusPoints();
+        return Math.max(0, Career.total() - intValue("spent"));
     }
 
     public int spent() {

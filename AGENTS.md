@@ -29,9 +29,9 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
 - `Career` - lifetime career points in `saves/common/ngp_renewed/career.json`. Never spent. Per save:
   highest level paid, points earned, fraction carried. `pay()` applies Rule Book - Renewed's multiplier
   from sector memory `$rbr_ngpMultiplier` (float, default 1).
-- `SaveState` - per save, a plain map in sector persistent data `ngp_renewed_state`: save id, budget
-  snapshot (`budgetBase` = career earned when the save got its state, so only other saves' points
-  count), points spent, purchases per item, delivery bay cargo, the Ledger entity.
+- `SaveState` - per save, a plain map in sector persistent data `ngp_renewed_state`: save id,
+  points spent (the budget is `Career.total()` minus that, so points earned in this game count at once:
+  0.7.5, Andrzej saw 0 to spend with 167 career points; `budgetBase` is still written but unused), purchases per item, delivery bay cargo, the Ledger entity.
 - `CampaignScript` (transient, real-time 1 s) - pays levels (`LevelTracker`) and places the Ledger
   (`LedgerSpawner`) once no dialog is open.
 - `data/campaign/ngp_store_items.csv` - every store item. Kinds: story_points, skill_points, levels,
@@ -57,8 +57,12 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
 - Rule Book - Renewed's achievement `rbr_ngp_ledger` ("Use a consumable item") reads sector memory
   `$ngp_usedConsumable` (set by `ShipItems.apply`, 0.7.2) and, for older versions, the hull mod id
   `ngp_ledger_refit`. Never rename either.
-- `store/StorePanel` - the store screen. All buttons in ONE tooltip element covering the whole panel
-  at inTL(0,0) (offset elements never get clicks). Row text in separate button-free elements.
+- `store/StorePanel` (0.7.5 rebuild) - the store screen, about 86% of the screen. Built like Achievements -
+  Renewed's screen: per tab a container panel made once with a scrolling TooltipMakerAPI (smooth wheel
+  scrolling) holding a content panel of labels; hidden tabs are moved off screen. Tabs, rows, icons and
+  buttons are drawn in renderBelow and hit-tested in advance() from `Mouse` state, reading the content
+  panel's real position each frame. No ButtonAPI: in 0.7.4 the tab buttons drew but never got clicks.
+  `delegate()` is a separate object so advance runs once a frame.
 - `ships/` - the Shipyard items (special items with a right-click dialog). S-mod slots and stat boosts
   are variant tags read by the permanent hull mod `ngp_ledger_refit`; extra OP is the permanent hull
   mod `ngp_ledger_rails` with negative OP cost. `SaveState` records each ship's work by member id and
@@ -68,4 +72,6 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
 - Players see the station as **Legacy Station** (0.7.4, Andrzej disliked "the Ledger"); classes and ids
   keep the old `ledger` names so saves load. Its entity type needs the tag `has_interaction_dialog`, or the
   game draws it but never lets the player click it; `LedgerSpawner.fixUp` adds the tag and the name to
-  stations in older saves.
+  stations in older saves. The hover tooltip needs a `customDescriptionId` (`ngp_legacy_station` in
+  data/strings/descriptions.csv): without one the game shows no tooltip for a custom entity. Sector entity
+  memory `$playLocationMusicDuringEnc` keeps the system's music during the visit. fixUp sets both too.

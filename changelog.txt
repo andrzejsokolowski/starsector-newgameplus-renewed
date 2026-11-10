@@ -1,3 +1,9 @@
+Version 0.7.5 (2026-11-10)
+- The store screen is rebuilt: it fills most of the screen, the list scrolls smoothly with the mouse wheel, and the tabs can be clicked.
+- Points to spend are now your whole career total less what this game has spent, so points earned in the current game can be spent at once.
+- Legacy Station now shows a tooltip when you hover over it.
+- The system's music keeps playing while you visit Legacy Station.
+
 Version 0.7.4 (2026-11-10)
 - The store station is now called Legacy Station, and it can be clicked: before, it showed up but could not be flown to or talked to. Stations in existing saves are fixed on load.
 - The other "Ledger" texts are renamed too: messages now say "Your legacy grows", and the storage perk is now Deep Holds.

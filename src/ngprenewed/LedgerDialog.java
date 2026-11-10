@@ -48,8 +48,7 @@ public class LedgerDialog implements InteractionDialogPlugin {
         SaveState state = SaveState.get();
         if (state == null) return;
         Color h = Misc.getHighlightColor();
-        dialog.getTextPanel().addPara("Points to spend: %s of %s.", h,
-                String.valueOf(state.budget()), String.valueOf(state.startingBudget()));
+        dialog.getTextPanel().addPara("Points to spend: %s.", h, String.valueOf(state.budget()));
     }
 
     private void showOptions() {
@@ -68,7 +67,8 @@ public class LedgerDialog implements InteractionDialogPlugin {
     public void optionSelected(String optionText, Object optionData) {
         if (optionText != null) dialog.addOptionSelectedText(optionData);
         if (optionData == Option.BROWSE) {
-            dialog.showCustomVisualDialog(StorePanel.WIDTH, StorePanel.HEIGHT, new StorePanel(this));
+            StorePanel store = new StorePanel(this);
+            dialog.showCustomVisualDialog(store.width(), store.height(), store.delegate());
         } else if (optionData == Option.COLLECT) {
             collect();
         } else if (optionData == Option.LEAVE) {
