@@ -1,3 +1,6 @@
+Version 0.7.3 (2026-11-10)
+- The hull mods the ship items add are renamed: Ledger Refit is now Hull Upgrades, Ledger Mount Rails is now Extra Ordnance Points.
+
 Version 0.7.2 (2026-11-10)
 - Using any of the ship items (S-mod slot, D-mod removal, Stat tuning, Extra ordnance points) now counts for Rule Book - Renewed's achievement "Use a consumable item".
 

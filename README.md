@@ -33,7 +33,7 @@ next to your starting fleet. Spend your career points there on a head start.
   by hull size). They arrive as cargo items; right-click one to fit it to a ship. Stat tuning raises
   one stat on one ship (hull, armor, flux capacity, flux dissipation, top speed or weapon range +10%,
   peak performance time +20%, supply use -10%); each ship can take each stat once. The work shows on
-  the ship as the Ledger Refit and Ledger Mount Rails hull mods, which cannot be removed.
+  the ship as the Hull Upgrades and Extra Ordnance Points hull mods, which cannot be removed.
 - **Perk:** +10% cargo, fuel and crew capacity for the rest of the game (Logistics tab, once per game).
 - **Armoury:** one weapon pack per faction, two of every weapon that faction knows, 20 points each.
   Modded factions get their own packs, and blueprints a faction learns during the game are included.
