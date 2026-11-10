@@ -9,7 +9,8 @@ import org.json.JSONObject;
  * The career total: points earned in every save, kept in saves/common so it outlives any save.
  *
  * <p>File layout ({@code saves/common/ngp_renewed/career.json}):
- * {@code {"version":1, "earned":N, "saves":{"<saveId>":{"levelsPaid":L, "earned":E, "carry":C}}}}.
+ * {@code {"version":1, "earned":N, "feats":{"<featId>":true}, "saves":{"<saveId>":{"levelsPaid":L, "earned":E, "carry":C}}}}.
+ * Feats are paid once per profile, so they sit outside the per-save records.
  * {@code earned} is the lifetime total. Each save keeps the highest level it has been paid for, so a
  * level is paid once per save even after reloading an older save file.</p>
  *
@@ -110,6 +111,33 @@ public final class Career {
     /** Points this save has added to the career. */
     public static int earnedBy(String saveId) {
         return record(saveId).optInt("earned", 0);
+    }
+
+    /** True once the profile has been paid for this feat, in any save. */
+    public static boolean featPaid(String featId) {
+        JSONObject feats = data().optJSONObject("feats");
+        return feats != null && feats.optBoolean(featId, false);
+    }
+
+    /**
+     * Pays a feat once for the whole profile. The feat is marked paid in the same file write that adds
+     * the points, so the two never get out of step.
+     *
+     * @return whole points added
+     */
+    public static int payFeat(String saveId, String featId, float points) {
+        try {
+            JSONObject feats = data().optJSONObject("feats");
+            if (feats == null) {
+                feats = new JSONObject();
+                data().put("feats", feats);
+            }
+            feats.put(featId, true);
+        } catch (Exception e) {
+            log.error("New Game Plus - Renewed: could not record feat " + featId, e);
+            return 0;
+        }
+        return pay(saveId, points);
     }
 
     /** Rule Book - Renewed's multiplier, or 1 when it is not installed or has no rules active. */

@@ -1,3 +1,7 @@
+Version 0.4.0 (2026-11-10)
+- Feats now earn career points, once per profile: At the Gates 20, the Planetkiller recovered 20, an Omega fleet beaten 30, the Ziggurat defeated 20, the Galatia Academy story 10, the Usurpers 10, the Knight Errant 10, a duel won 5, Kanta's protection 5.
+- A feat already finished in a save you load pays when you load it.
+
 Version 0.3.0 (2026-11-10)
 - Weapon packs now go by faction: one pack per faction with every weapon it knows, two of each, 10 points each. Modded factions get their own packs, and blueprints a faction learns during the game are included.
 - New in the Rare tab: Tenebrian Nanoforge (with AoTD - Vaults of Knowledge, 10 points) and Arc Sustainer (with Sephira Conclave, 8 points), 1 per game each.

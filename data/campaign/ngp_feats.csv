@@ -1,0 +1,11 @@
+id,name,points,requiresMod,memory,flag
+# Feats pay career points once per profile. memory: sector or player. requiresMod: a mod id or empty.,,,,,
+at_the_gates,At the Gates,20,,sector,$gaATG_missionCompleted
+planetkiller,The Planetkiller recovered,20,,sector,$pk_recovered
+omega,An Omega fleet beaten,30,,sector,$ngp_defeatedOmega
+ziggurat,The Ziggurat defeated,20,,sector,$defeatedZiggurat
+academy,The Galatia Academy story,10,,sector,$gaKA_missionCompleted
+usurpers,The Usurpers,10,,sector,$sdtu_missionCompleted
+knight_errant,The Knight Errant,10,,sector,$lke_missionCompleted
+duel,A duel won,5,,player,$soe_wonDuel
+kanta,Kanta's protection,5,,player,$everHadKantaProtection

@@ -2,6 +2,8 @@ package ngprenewed;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import ngprenewed.feats.Feats;
+import ngprenewed.feats.OmegaBattleListener;
 import ngprenewed.store.StoreCatalog;
 
 /**
@@ -13,6 +15,7 @@ public class NGPModPlugin extends BaseModPlugin {
     @Override
     public void onApplicationLoad() {
         StoreCatalog.load();
+        Feats.load();
     }
 
     @Override
@@ -22,5 +25,6 @@ public class NGPModPlugin extends BaseModPlugin {
         if (!Global.getSector().hasTransientScript(CampaignScript.class)) {
             Global.getSector().addTransientScript(new CampaignScript());
         }
+        Global.getSector().addTransientListener(new OmegaBattleListener());
     }
 }

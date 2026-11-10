@@ -11,6 +11,10 @@ next to your starting fleet. Spend your career points there on a head start.
 - **Levels:** each level you gain pays 1 career point (LunaLib setting). Each save pays each level
   once. Levels bought in the store pay nothing. Points earned in a game go to your next games, not to
   the store of the game you earned them in.
+- **Feats** pay once per profile, never again in any save: At the Gates 20, the Planetkiller
+  recovered 20, an Omega fleet beaten 30, the Ziggurat defeated 20, the Galatia Academy story 10, the
+  Usurpers 10, the Knight Errant 10, a duel won 5, Kanta's protection 5. The list is
+  `data/campaign/ngp_feats.csv`; other mods can add lines to it.
 - **The Ledger** appears near your fleet when a game starts (or the first time you load an older save
   with the mod installed). It stays for the whole game and is marked on the intel screen.
 - **The store** has tabs and a scrolling list. Click Buy, then Confirm. Story points, skill points,
