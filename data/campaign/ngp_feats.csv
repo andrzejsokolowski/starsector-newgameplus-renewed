@@ -1,11 +1,44 @@
-id,name,points,requiresMod,memory,flag
-# Feats pay career points once per profile. memory: sector or player. requiresMod: a mod id or empty.,,,,,
-at_the_gates,At the Gates,20,,sector,$gaATG_missionCompleted
-planetkiller,The Planetkiller recovered,20,,sector,$pk_recovered
-omega,An Omega fleet beaten,30,,sector,$ngp_defeatedOmega
-ziggurat,The Ziggurat defeated,20,,sector,$defeatedZiggurat
-academy,The Galatia Academy story,10,,sector,$gaKA_missionCompleted
-usurpers,The Usurpers,10,,sector,$sdtu_missionCompleted
-knight_errant,The Knight Errant,10,,sector,$lke_missionCompleted
-duel,A duel won,5,,player,$soe_wonDuel
-kanta,Kanta's protection,5,,player,$everHadKantaProtection
+id,name,points,requiresMod,memory,flag,check,value
+# Feats pay career points once per profile. memory: sector or player. requiresMod: a mod id or empty.,,,,,,,
+# check: flag (default; join keys with & for all or | for any) / equals (the key holds value) / skill (the player has the skill named in flag).,,,,,,,
+at_the_gates,At the Gates,20,,sector,$gaATG_missionCompleted,,
+planetkiller,The Planetkiller recovered,20,,sector,$pk_recovered,,
+omega,An Omega fleet beaten,30,,sector,$ngp_defeatedOmega,,
+ziggurat,The Ziggurat defeated,20,,sector,$defeatedZiggurat,,
+academy,The Galatia Academy story,10,,sector,$gaKA_missionCompleted,,
+usurpers,The Usurpers,10,,sector,$sdtu_missionCompleted,,
+knight_errant,The Knight Errant,10,,sector,$lke_missionCompleted,,
+duel,A duel won,5,,player,$soe_wonDuel,,
+kanta,Kanta's protection,5,,player,$everHadKantaProtection,,
+hot_masterwork,Isa's masterwork,10,ship_trophy_room,sector,$ship_trophy_room_isa_masterwork_completed,,
+hot_gan_eden,Gan Eden,30,ship_trophy_room,sector,$shipTrophyGanEdenQuestStage,equals,COMPLETED
+sotf_a_memory,A Memory,15,secretsofthefrontier,sector,$sotf_AMemoryCompleted,,
+sotf_wayward_star,The Wayward Star,30,secretsofthefrontier,sector,$sotf_WSCombatWon,,
+sotf_lost_thread,A Lost Thread,10,secretsofthefrontier,sector,$sotf_lostthread_completed,,
+sotf_hypnos,Legacy of Hypnos,10,secretsofthefrontier,sector,$sotf_loh_completed,,
+sotf_barrow,Annex-Barrow defeated,15,secretsofthefrontier,sector,$sotf_defeatedBarrow,,
+sotf_hallowhall,Hope for Hallowhall,10,secretsofthefrontier,sector,$sotf_completedHFH,,
+rat_singularity,The Singularity at the bottom of the Abyss,30,assortment_of_things,player,rat_abyssal_requiem,skill,
+kol_tritachyon,The Tri-Tachyon black site,20,knights_of_ludd,sector,$zea_defeatedNineveh,,
+kol_elysia,Elysia,20,knights_of_ludd,sector,$zea_elysian_boss1_done&$zea_elysian_boss2_done,,
+kol_dawn,Dawn,15,knights_of_ludd,sector,$zea_dawn_boss_done,,
+kol_dusk,Dusk,15,knights_of_ludd,sector,$zea_dusk_boss_done,,
+heggie_tales,Heggie Tales,15,eluxor_hegtales,sector,$hegtales_Quest3_missionCompleted,,
+sol_deterrent,The Deterrent,30,sol_renewed,sector,$sr_crisis_deterred,,
+sol_transfer,Transferring Sol,5,sol_renewed,sector,$sr_quest_stage,equals,DONE
+nex_salvation,Salvation,30,nexerelin,sector,$nex_remSalvation_missionCompleted,,
+sephira_burning_storm,Operation Burning Storm,20,bb_plus,sector,$BBPOperationBS_completed,,
+liminal_crisis,The Liminal Crisis,20,liminal,sector,$liminal_crisis_end,,
+wwlb_iaiic,The IAIIC crisis,30,niko_morePlanetaryConditions,sector,$MPC_IAIICDefeated,,
+wwlb_manufactorum,The Omega Manufactorum,20,niko_morePlanetaryConditions,sector,$MPC_playerFinishedOmegaManufactorum,,
+dpl_prometheus,Project Prometheus,20,dpl_phase_lab,sector,$dpl_PrometheusCompleted,,
+dpl_helheim,The Helheim Supremacy,10,dpl_phase_lab,player,$dpl_crisisFinishedBadGuy|$dpl_defeatedDPLAttack,,
+diable_first_relay,The First Relay,20,diableavionics,sector,$da_gulf_part2_complete,,
+et_thousand_cuts,A Thousand Cuts,20,EmergentThreats_Vice,sector,$vice_thousand_cuts_succeeded,,
+et_shattered_fortress,Shattered Fortress,15,EmergentThreats_Vice,sector,$vice_shattered_fortress_succeeded,,
+hsi_culann,The Culann mission,15,HaloDynamicsShipIndustry,sector,$HSI_TTMission_Finished,,
+babel_protocol,Babel Protocol,15,babylon,sector,$baby_babylon_bounty_succeeded,,
+crab_radiance,Dream No More,20,crabshack,sector,$cs_defeatedRadiance,,
+tahlan_opis,The Elegy of Opis,15,tahlanadditions,sector,$sb_elegyOfOpisCompleted,,
+tahlan_illustrious,The Illustrious,10,tahlanadditions,sector,$sb_viceTour,equals,10
+uaf_tilted_dagger,Tilted Dagger,15,uaf,sector,$UAFTiltedDaggerMissionPartThree_Completed&$UAFTiltedDaggerPartThree_GoodConclusion,,

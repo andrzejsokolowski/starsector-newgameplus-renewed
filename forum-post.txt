@@ -1,4 +1,4 @@
-Subject: [0.98a] New Game Plus - Renewed 0.4.0 - career points from every save, spent on a head start in the next one
+Subject: [0.98a] New Game Plus - Renewed 0.5.0 - career points from every save, spent on a head start in the next one
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/releases/latest][b]New Game Plus - Renewed[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-newgameplus-renewed/main/graphics/ngp/ngp_icon.png[/img]
@@ -18,6 +18,7 @@ Needs LunaLib.
 [li]They are never spent. Every new game gets a budget equal to the points you earned in your other saves. Points you earn during a game go to your next games.[/li]
 [li]Levels bought in the store pay nothing.[/li]
 [li]Feats pay once per profile, never again in any save: At the Gates 20, the Planetkiller recovered 20, an Omega fleet beaten 30, the Ziggurat defeated 20, the Galatia Academy story 10, the Usurpers 10, the Knight Errant 10, a duel won 5, Kanta's protection 5.[/li]
+[li]Feats from other mods, when installed: Hall of Triumph: Isa's masterwork 10, Gan Eden 30. Secrets of the Frontier: A Memory 15, The Wayward Star 30, A Lost Thread 10, Legacy of Hypnos 10, Annex-Barrow 15, Hope for Hallowhall 10. Random Assortment of Things: the Singularity 30. Knights of Ludd: Tri-Tachyon black site 20, Elysia 20, Dawn 15, Dusk 15. Heggie Tales 15. Sol Renewed: The Deterrent 30, Transferring Sol 5. Nexerelin: Salvation 30. Sephira Conclave: Operation Burning Storm 20. Liminal: the Liminal Crisis 20. What We Left Behind: the IAIIC crisis 30, the Omega Manufactorum 20. Domain Phase Lab: Project Prometheus 20, the Helheim Supremacy 10. Diable Avionics: the First Relay 20. Emergent Threats: A Thousand Cuts 20, Shattered Fortress 15. Halo Dynamics: the Culann mission 15. Core of Babel: Babel Protocol 15. Crab Shack: Dream No More 20. Tahlan Additions: The Elegy of Opis 15, The Illustrious 10. United Aurora Federation: Tilted Dagger 15.[/li]
 [/list]
 
 [hr][center][size=12pt][b]The Ledger[/b][/size][/center][hr]
@@ -59,6 +60,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.5.0[/b]
+[list][li]Feats from 18 other mods now earn career points, once per profile.[/li][/list]
 [b]0.4.0[/b]
 [list][li]Feats now earn career points, once per profile.[/li][/list]
 [b]0.3.0[/b]

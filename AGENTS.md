@@ -37,7 +37,8 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   Kind peerless_point goes through `compat/PeerlessBridge` (Peerless Skills API, compileOnly). Cargo goes to the delivery bay and
   reaches the player through a loot screen (never straight into cargo).
 - `feats/Feats` - `data/campaign/ngp_feats.csv` (id, name, points, requiresMod, memory sector|player,
-  flag). Paid once per PROFILE: `Career.payFeat` marks `feats.<id>` in career.json in the same write.
+  flag, check flag|equals|skill, value). Flag may join keys with & (all) or | (any). getBoolean also
+  reads the text "true" that rules.csv stores. Paid once per PROFILE: `Career.payFeat` marks `feats.<id>` in career.json in the same write.
   `OmegaBattleListener` sets `$ngp_defeatedOmega` (the game has no flag for it).
 - `store/StorePanel` - the store screen. All buttons in ONE tooltip element covering the whole panel
   at inTL(0,0) (offset elements never get clicks). Row text in separate button-free elements.

@@ -50,7 +50,14 @@ public final class Feats {
                     continue;
                 }
                 String name = text(row, "name");
-                feats.add(new Feat(id, name.isEmpty() ? id : name, Math.max(0, points), text(row, "memory"), flag));
+                String check = text(row, "check").toLowerCase();
+                if (check.isEmpty()) check = "flag";
+                if (!check.equals("flag") && !check.equals("equals") && !check.equals("skill")) {
+                    log.warn("New Game Plus - Renewed: feat " + id + " has unknown check " + check + "; skipped.");
+                    continue;
+                }
+                feats.add(new Feat(id, name.isEmpty() ? id : name, Math.max(0, points), text(row, "memory"), flag,
+                        check, text(row, "value")));
             }
         } catch (Exception e) {
             log.error("New Game Plus - Renewed: could not read " + PATH, e);
@@ -82,10 +89,43 @@ public final class Feats {
         }
     }
 
-    private static boolean achieved(Feat feat) {
+    /**
+     * Whether this game has done the feat. getBoolean also reads the text "true", which is how
+     * rules.csv stores a flag, so flags set by dialogs and by code both work.
+     */
+    static boolean achieved(Feat feat) {
+        if ("skill".equals(feat.check)) {
+            return Global.getSector().getPlayerStats().getSkillLevel(feat.flag) > 0f;
+        }
         MemoryAPI memory = "player".equalsIgnoreCase(feat.memory)
                 ? Global.getSector().getCharacterData().getMemoryWithoutUpdate()
                 : Global.getSector().getMemoryWithoutUpdate();
-        return memory != null && memory.getBoolean(feat.flag);
+        if (memory == null) return false;
+        if ("equals".equals(feat.check)) {
+            return memory.contains(feat.flag) && sameValue(memory.getString(feat.flag), feat.value);
+        }
+        if (feat.flag.contains("|")) {
+            for (String key : feat.flag.split("\\|")) {
+                if (!key.trim().isEmpty() && memory.getBoolean(key.trim())) return true;
+            }
+            return false;
+        }
+        for (String key : feat.flag.split("&")) {
+            if (!key.trim().isEmpty() && !memory.getBoolean(key.trim())) return false;
+        }
+        return true;
+    }
+
+    /** Text compared without case; numbers compared as numbers, so 10 matches "10" and 10.0. */
+    private static boolean sameValue(String actual, String wanted) {
+        if (actual == null) return false;
+        String a = actual.trim();
+        String w = wanted.trim();
+        if (a.equalsIgnoreCase(w)) return true;
+        try {
+            return Double.parseDouble(a) == Double.parseDouble(w);
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

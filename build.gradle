@@ -143,6 +143,23 @@ tasks.register('checkReleaseFiles') {
             if (cols.length <= costCol || !(cols[costCol].trim() ==~ /\d+/)) problems << "Store item cost is not a whole number in: ${line}"
         }
 
+        // Every feat needs whole-number points, a flag and a check kind the code knows.
+        def featLines = file('data/campaign/ngp_feats.csv').readLines('UTF-8').findAll { it.trim() && !it.startsWith('#') }
+        def featHeader = featLines[0].split(',')*.trim()
+        def fPoints = featHeader.indexOf('points')
+        def fFlag = featHeader.indexOf('flag')
+        def fCheck = featHeader.indexOf('check')
+        def fValue = featHeader.indexOf('value')
+        if ([fPoints, fFlag, fCheck, fValue].any { it < 0 }) problems << 'ngp_feats.csv needs points, flag, check and value columns'
+        else featLines.drop(1).each { line ->
+            def cols = line.split(',', -1)*.trim()
+            def check = cols.size() > fCheck ? cols[fCheck] : ''
+            if (!(cols.size() > fPoints && cols[fPoints] ==~ /\d+/)) problems << "Feat points are not a whole number in: ${line}"
+            if (!(cols.size() > fFlag && cols[fFlag])) problems << "Feat has no flag in: ${line}"
+            if (!(check in ['', 'flag', 'equals', 'skill'])) problems << "Unknown feat check in: ${line}"
+            if (check == 'equals' && !(cols.size() > fValue && cols[fValue])) problems << "Feat check equals needs a value in: ${line}"
+        }
+
         if (problems) throw new GradleException("Release files are not ready:\n  " + problems.join('\n  '))
         logger.lifecycle('Release files verified')
     }
