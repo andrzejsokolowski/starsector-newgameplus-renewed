@@ -47,7 +47,7 @@ public final class StoreCatalog {
     /** A faction needs this many weapons to get a pack. */
     private static final int PACK_MIN_WEAPONS = 5;
     /** Price of one faction's weapon pack (Andrzej, 2026-11-09). */
-    private static final int PACK_COST = 10;
+    private static final int PACK_COST = 20;
     /** Weapons the game keeps out of shops and loot. */
     private static final Set<String> EXCLUDED_TAGS = new HashSet<>(Arrays.asList(
             "restricted", "no_drop", "no_sell", "no_dealer", "omega", "threat", "dweller", "monster", "fragment"));

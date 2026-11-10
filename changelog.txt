@@ -1,3 +1,6 @@
+Version 0.5.2 (2026-11-10)
+- Every store price is doubled, weapon packs included. The Omega core now costs 80 career points.
+
 Version 0.5.1 (2026-11-10)
 - The Omega core now costs 40 career points (was 20).
 
