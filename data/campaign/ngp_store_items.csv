@@ -19,7 +19,7 @@ crew_large,Logistics,Crew (250),,4,-1,,commodity,crew,250,
 marines_small,Logistics,Marines (50),,2,-1,,commodity,marines,50,
 machinery_small,Logistics,Heavy machinery (100),,2,-1,,commodity,heavy_machinery,100,
 perk_storage,Logistics,Deeper holds: cargo / fuel / crew +10 percent,Every hold in the fleet runs a little deeper than its blueprints say.,10,1,,perk,ngp_storage_perk,1,
-omega_core,Rare,Omega core,It was waiting for you. It says it always is.,20,1,,commodity,omega_core,1,
+omega_core,Rare,Omega core,It was waiting for you. It says it always is.,40,1,,commodity,omega_core,1,
 tenebrian_nanoforge,Rare,Tenebrian Nanoforge,It hums in a key that makes the crew avoid the cargo bay.,10,1,aotd_vok,special_item,aotd_shrouded_nanoforge,1,
 arc_sustainer,Rare,Arc Sustainer,Sephira Labs swears none ever left their vaults. The serial number says otherwise.,8,1,bb_plus,special_item,bbplus_arc_sustainer,1,
 peerless_point,Command,Peerless point,A lesson only the best ever learn. You learned it somewhere else.,10,1,peerless_skills,peerless_point,,1,graphics/ngp/item_skill.png
