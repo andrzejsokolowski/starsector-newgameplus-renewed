@@ -33,7 +33,8 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   (`LedgerSpawner`) once no dialog is open.
 - `data/campaign/ngp_store_items.csv` - every store item. Kinds: story_points, skill_points, levels,
   credits, commodity, special_item, perk (a hidden player skill). `stock` -1 = no limit per game.
-  The Armoury tab (kind weapon_pack) is built in code from the loaded weapons, not the CSV. Cargo goes to the delivery bay and
+  The Armoury tab (kind weapon_pack, one per faction) is built in code from the loaded factions, not the CSV.
+  Kind peerless_point goes through `compat/PeerlessBridge` (Peerless Skills API, compileOnly). Cargo goes to the delivery bay and
   reaches the player through a loot screen (never straight into cargo).
 - `store/StorePanel` - the store screen. All buttons in ONE tooltip element covering the whole panel
   at inTL(0,0) (offset elements never get clicks). Row text in separate button-free elements.

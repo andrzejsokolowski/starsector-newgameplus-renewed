@@ -1,4 +1,4 @@
-Subject: [0.98a] New Game Plus - Renewed 0.2.0 - career points from every save, spent on a head start in the next one
+Subject: [0.98a] New Game Plus - Renewed 0.3.0 - career points from every save, spent on a head start in the next one
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/releases/latest][b]New Game Plus - Renewed[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-newgameplus-renewed/main/graphics/ngp/ngp_icon.png[/img]
@@ -31,10 +31,11 @@ Needs LunaLib.
 [list]
 [li]Command: story points (3, 10, 30 or 100), skill points (2 per game), levels.[/li]
 [li]Logistics: credits, supplies, fuel, crew, marines, heavy machinery, and a perk: +10 percent cargo, fuel and crew capacity for the rest of the game.[/li]
-[li]Rare: an Omega core (1 per game).[/li]
+[li]Rare: an Omega core, and with the right mods a Tenebrian Nanoforge (AoTD - Vaults of Knowledge) and an Arc Sustainer (Sephira Conclave), 1 per game each.[/li]
+[li]With Peerless Skills: a Peerless point (1 per game).[/li]
 [li]Shipyard: S-mod slot (+1), D-mod removal, Stat tuning and Extra ordnance points (2 / 6 / 15 / 40 by hull size). They arrive as cargo items; right-click one to fit it to a ship.[/li]
 [li]Stat tuning: hull, armor, flux capacity, flux dissipation, top speed or weapon range +10 percent, peak performance time +20 percent, or supply use -10 percent. Each ship can take each stat once.[/li]
-[li]Armoury: one weapon pack per design type with 5 or more weapons, two of each weapon. Modded design types get their own packs.[/li]
+[li]Armoury: one weapon pack per faction, two of every weapon that faction knows, 10 points each. Modded factions get their own packs.[/li]
 [/list]
 
 [hr][center][size=12pt][b]Settings and compatibility[/b][/size][/center][hr]
@@ -57,6 +58,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.3.0[/b]
+[list][li]Weapon packs now go by faction, 10 points each, modded factions included.[/li][li]New: Tenebrian Nanoforge (with AoTD - Vaults of Knowledge) and Arc Sustainer (with Sephira Conclave).[/li][li]New: a Peerless point (with Peerless Skills).[/li][/list]
 [b]0.2.0[/b]
 [list][li]New Shipyard tab: S-mod slot (+1), D-mod removal, Stat tuning and Extra ordnance points, fitted by right-clicking the item.[/li][li]New perk: +10 percent cargo, fuel and crew capacity for the rest of the game.[/li][li]New Armoury tab: weapon packs by design type, modded types included.[/li][/list]
 [b]0.1.0[/b]

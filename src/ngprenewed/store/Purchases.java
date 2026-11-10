@@ -8,6 +8,7 @@ import com.fs.starfarer.api.plugins.LevelupPlugin;
 import ngprenewed.Career;
 import ngprenewed.LevelTracker;
 import ngprenewed.SaveState;
+import ngprenewed.compat.PeerlessBridge;
 import org.apache.log4j.Logger;
 
 /** Checks and carries out one purchase. */
@@ -89,6 +90,11 @@ public final class Purchases {
                 break;
             case "perk":
                 grantPerk(item.target);
+                break;
+            case "peerless_point":
+                // A new key per purchase, so each one pays; Peerless Skills refuses a key it has seen.
+                String key = "$ngp_renewed_" + state.saveId() + "_" + item.id + "_" + (state.boughtCount(item.id) + 1);
+                if (!PeerlessBridge.awardPoint(key)) throw new IllegalStateException("Peerless Skills refused " + key);
                 break;
             default:
                 throw new IllegalStateException("unknown kind " + item.kind);

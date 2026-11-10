@@ -2,6 +2,8 @@ package ngprenewed.store;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SpecialItemSpecAPI;
+import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.campaign.FactionSpecAPI;
 import com.fs.starfarer.api.campaign.econ.CommoditySpecAPI;
 import com.fs.starfarer.api.characters.SkillSpecAPI;
 import com.fs.starfarer.api.combat.WeaponAPI.AIHints;
@@ -26,8 +28,8 @@ import java.util.TreeMap;
 /**
  * Every store item, read once at game start from data/campaign/ngp_store_items.csv (merged across
  * mods, so another mod can add lines). Items that need a missing mod, or name a commodity or special
- * item that does not exist, are left out. The Armoury tab is built from the loaded weapons instead:
- * one pack per design type, so modded design types appear by themselves.
+ * item that does not exist, are left out. The Armoury tab is built from the loaded factions instead:
+ * one weapon pack per faction, so modded factions appear by themselves.
  */
 public final class StoreCatalog {
 
@@ -42,10 +44,10 @@ public final class StoreCatalog {
     public static final String ARMOURY = "Armoury";
     /** Copies of every weapon in a pack. */
     public static final int PACK_COPIES = 2;
-    /** A design type needs this many weapons to get a pack. */
+    /** A faction needs this many weapons to get a pack. */
     private static final int PACK_MIN_WEAPONS = 5;
-    /** Weapon value per career point, matching the credit packs (1000000 credits for 25 points). */
-    private static final float CREDITS_PER_POINT = 40000f;
+    /** Price of one faction's weapon pack (Andrzej, 2026-11-09). */
+    private static final int PACK_COST = 10;
     /** Weapons the game keeps out of shops and loot. */
     private static final Set<String> EXCLUDED_TAGS = new HashSet<>(Arrays.asList(
             "restricted", "no_drop", "no_sell", "no_dealer", "omega", "threat", "dweller", "monster", "fragment"));
@@ -143,52 +145,40 @@ public final class StoreCatalog {
     }
 
     /**
-     * One pack per design type with at least {@link #PACK_MIN_WEAPONS} weapons, leaving out weapons the
-     * game never sells or drops, built-in and system weapons. Packs are sorted by design type.
+     * One pack per faction that knows at least {@link #PACK_MIN_WEAPONS} weapons, built from every
+     * faction the game and its mods load, so modded factions get packs by themselves. Weapons the game
+     * never sells or drops, built-in and system weapons are left out. Sorted by faction name.
      */
     private static void addWeaponPacks(Set<String> tabOrder) {
-        Map<String, List<WeaponSpecAPI>> byDesign = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-        for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
-            if (!packable(spec)) continue;
-            byDesign.computeIfAbsent(design(spec), k -> new ArrayList<>()).add(spec);
+        Map<String, FactionSpecAPI> byName = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        for (FactionSpecAPI faction : Global.getSettings().getAllFactionSpecs()) {
+            if (faction == null || "player".equals(faction.getId()) || !faction.isShowInIntelTab()) continue;
+            byName.put(faction.getDisplayName() + " " + faction.getId(), faction);
         }
-        for (Map.Entry<String, List<WeaponSpecAPI>> entry : byDesign.entrySet()) {
-            List<WeaponSpecAPI> specs = entry.getValue();
-            if (specs.size() < PACK_MIN_WEAPONS) continue;
-            String design = entry.getKey();
-            List<String> ids = new ArrayList<>();
-            float value = 0f;
-            for (WeaponSpecAPI spec : specs) {
-                ids.add(spec.getWeaponId());
-                value += Math.max(0f, spec.getBaseValue()) * PACK_COPIES;
-            }
-            // Weapons are cheap in credits and rare in shops, so a big pack also costs by its size.
-            int cost = Math.max(2, Math.max(Math.round(value / CREDITS_PER_POINT), Math.round(specs.size() / 4f)));
-            String id = "weapons_" + design.toLowerCase().replaceAll("[^a-z0-9]+", "_");
-            packWeapons.put(design, ids);
-            items.add(new StoreItem(id, ARMOURY, design + " weapons (" + specs.size() + ")",
-                    "Two crates of every " + design + " design the Ledger could find.", cost, -1,
-                    "weapon_pack", design, PACK_COPIES, packIcon(design)));
+        for (FactionSpecAPI faction : byName.values()) {
+            List<String> ids = packableWeapons(faction.getKnownWeapons());
+            if (ids.size() < PACK_MIN_WEAPONS) continue;
+            packWeapons.put(faction.getId(), ids);
+            items.add(new StoreItem("weapons_" + faction.getId(), ARMOURY,
+                    faction.getDisplayName() + " weapons (" + ids.size() + ")",
+                    "Two crates of every weapon in the " + faction.getDisplayName() + " arsenal.",
+                    PACK_COST, -1, "weapon_pack", faction.getId(), PACK_COPIES, packIcon(faction)));
             tabOrder.add(ARMOURY);
         }
     }
 
-    /**
-     * The weapon's design type. The base game leaves it empty on its own weapons, so those are grouped
-     * by the blueprint package they belong to, and the rest go under Common.
-     */
-    private static String design(WeaponSpecAPI spec) {
-        String design = spec.getManufacturer();
-        if (design != null && !design.trim().isEmpty()) return design.trim();
-        if (spec.hasTag("hightech_bp")) return "High Tech";
-        if (spec.hasTag("midline_bp")) return "Midline";
-        if (spec.hasTag("lowtech_bp")) return "Low Tech";
-        if (spec.hasTag("missile_bp")) return "Missile";
-        return "Common";
+    private static List<String> packableWeapons(Set<String> weaponIds) {
+        List<String> result = new ArrayList<>();
+        if (weaponIds == null) return result;
+        for (String id : weaponIds) {
+            WeaponSpecAPI spec = weaponSpec(id);
+            if (spec != null && packable(spec)) result.add(id);
+        }
+        Collections.sort(result);
+        return result;
     }
 
     private static boolean packable(WeaponSpecAPI spec) {
-        if ("Unknown".equalsIgnoreCase(design(spec))) return false;
         WeaponType type = spec.getType();
         if (type != WeaponType.BALLISTIC && type != WeaponType.ENERGY && type != WeaponType.MISSILE
                 && type != WeaponType.HYBRID && type != WeaponType.COMPOSITE && type != WeaponType.SYNERGY
@@ -200,24 +190,41 @@ public final class StoreCatalog {
         return spec.getWeaponName() != null && !spec.getWeaponName().trim().isEmpty();
     }
 
-    private static String packIcon(String design) {
-        switch (design.toLowerCase()) {
-            case "high tech":
-                return "graphics/icons/cargo/package_hightech.png";
-            case "midline":
-                return "graphics/icons/cargo/package_midline.png";
-            case "low tech":
-                return "graphics/icons/cargo/package_lowtech.png";
-            case "missile":
-                return "graphics/icons/cargo/bp_missiles.png";
-            default:
-                return "graphics/icons/cargo/starship_weapons.png";
+    /** The faction's crest, or a weapons crate if it has none or it does not load. */
+    private static String packIcon(FactionSpecAPI faction) {
+        String crest = faction.getCrest();
+        if (crest != null && !crest.isEmpty()) {
+            try {
+                Global.getSettings().loadTexture(crest);
+                return crest;
+            } catch (Exception e) {
+                // fall through to the crate
+            }
+        }
+        return "graphics/icons/cargo/starship_weapons.png";
+    }
+
+    private static WeaponSpecAPI weaponSpec(String id) {
+        try {
+            return Global.getSettings().getWeaponSpec(id);
+        } catch (Exception e) {
+            return null;
         }
     }
 
-    /** The weapons in one design type's pack. */
-    public static List<String> packWeapons(String design) {
-        List<String> ids = packWeapons.get(design);
+    /**
+     * The weapons in one faction's pack. In a campaign this is what the faction knows right now, so
+     * blueprints it learned since the game started are included; otherwise the list from game start.
+     */
+    public static List<String> packWeapons(String factionId) {
+        if (Global.getSector() != null) {
+            FactionAPI faction = Global.getSector().getFaction(factionId);
+            if (faction != null) {
+                List<String> live = packableWeapons(faction.getKnownWeapons());
+                if (!live.isEmpty()) return live;
+            }
+        }
+        List<String> ids = packWeapons.get(factionId);
         return ids == null ? Collections.emptyList() : Collections.unmodifiableList(ids);
     }
 

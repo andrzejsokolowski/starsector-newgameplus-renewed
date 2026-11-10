@@ -1,3 +1,8 @@
+Version 0.3.0 (2026-11-10)
+- Weapon packs now go by faction: one pack per faction with every weapon it knows, two of each, 10 points each. Modded factions get their own packs, and blueprints a faction learns during the game are included.
+- New in the Rare tab: Tenebrian Nanoforge (with AoTD - Vaults of Knowledge, 10 points) and Arc Sustainer (with Sephira Conclave, 8 points), 1 per game each.
+- New in the Command tab: a Peerless point (with Peerless Skills, 10 points, 1 per game).
+
 Version 0.2.0 (2026-11-10)
 - New Shipyard tab: S-mod slot (+1), D-mod removal, Stat tuning and Extra ordnance points (2 / 6 / 15 / 40 by hull size). They arrive as cargo items; right-click one to fit it to a ship.
 - Stat tuning raises one stat of your choice on one ship: hull, armor, flux capacity, flux dissipation, top speed or weapon range by 10 percent, peak performance time by 20 percent, or cuts supply use by 10 percent. Each ship can take each stat once.
