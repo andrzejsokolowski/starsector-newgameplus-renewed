@@ -1,3 +1,7 @@
+Version 0.7.4 (2026-11-10)
+- The store station is now called Legacy Station, and it can be clicked: before, it showed up but could not be flown to or talked to. Stations in existing saves are fixed on load.
+- The other "Ledger" texts are renamed too: messages now say "Your legacy grows", and the storage perk is now Deep Holds.
+
 Version 0.7.3 (2026-11-10)
 - The hull mods the ship items add are renamed: Ledger Refit is now Hull Upgrades, Ledger Mount Rails is now Extra Ordnance Points.
 

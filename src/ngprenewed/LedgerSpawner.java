@@ -7,24 +7,30 @@ import com.fs.starfarer.api.campaign.LocationAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 
 /**
- * Puts the Ledger station next to the player the first time the campaign is ready: a new game, or
+ * Puts Legacy Station (internally still "the Ledger": ids stay for old saves) next to the player the first time the campaign is ready: a new game, or
  * the first load of an older save. Waits until no dialog is open, so start screens from other mods
  * (Nexerelin's starting options, for example) have placed the fleet first.
  */
 public final class LedgerSpawner {
 
     public static final String ENTITY_TYPE = "ngp_ledger_station";
+    /** The name players see (Andrzej, 2026-11-10: not "the Ledger"). */
+    public static final String NAME = "Legacy Station";
 
     private LedgerSpawner() {
     }
 
     public static void ensure(SaveState state) {
         SectorEntityToken existing = state.ledger();
-        if (existing != null && existing.isAlive()) return;
+        if (existing != null && existing.isAlive()) {
+            fixUp(existing);
+            return;
+        }
 
         CampaignUIAPI ui = Global.getSector().getCampaignUI();
         if (ui == null || ui.isShowingDialog() || ui.isShowingMenu()) return;
@@ -34,6 +40,7 @@ public final class LedgerSpawner {
         LocationAPI where = fleet.getContainingLocation();
         SectorEntityToken ledger = where.addCustomEntity("ngp_ledger_" + Misc.genUID(), null, ENTITY_TYPE, Factions.NEUTRAL);
         ledger.setDiscoverable(false);
+        fixUp(ledger);
 
         Vector2f at = fleet.getLocation();
         if (where instanceof StarSystemAPI && !where.isHyperspace() && ((StarSystemAPI) where).getCenter() != null) {
@@ -50,6 +57,15 @@ public final class LedgerSpawner {
 
         LedgerIntel intel = new LedgerIntel(ledger);
         Global.getSector().getIntelManager().addIntel(intel, true);
-        ui.addMessage("The Ledger has opened its doors near your fleet.", Misc.getHighlightColor());
+        ui.addMessage(NAME + " has opened its doors near your fleet.", Misc.getHighlightColor());
+    }
+
+    /**
+     * Without has_interaction_dialog the game draws the station but never lets the player click it
+     * (0.7.3 and older). Stations made before 0.7.4 also keep their old name, so both are put right here.
+     */
+    private static void fixUp(SectorEntityToken station) {
+        if (!station.hasTag(Tags.HAS_INTERACTION_DIALOG)) station.addTag(Tags.HAS_INTERACTION_DIALOG);
+        if (!NAME.equals(station.getName())) station.setName(NAME);
     }
 }

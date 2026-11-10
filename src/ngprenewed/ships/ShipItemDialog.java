@@ -52,7 +52,7 @@ public class ShipItemDialog implements InteractionDialogPlugin {
     private String opening() {
         switch (itemId) {
             case ShipItems.SMOD_SLOT:
-                return "A dockyard charter stamped with the Ledger's seal. Any yard that reads it will find room for one more refit it should not be able to fit.";
+                return "A dockyard charter stamped with Legacy Station's seal. Any yard that reads it will find room for one more refit it should not be able to fit.";
             case ShipItems.DMOD_REMOVAL:
                 return "A crate of parts machined to tolerances nobody has used since the Collapse. The manifest names a ship, but leaves the hull number blank.";
             case ShipItems.STAT_TUNING:
@@ -60,7 +60,7 @@ public class ShipItemDialog implements InteractionDialogPlugin {
             case ShipItems.EXTRA_OP:
                 return "Mount rails and power couplings cut for a hull that does not exist yet. They will fit whichever one you choose.";
             default:
-                return "The Ledger's work, waiting for a ship.";
+                return "Legacy Station's work, waiting for a ship.";
         }
     }
 

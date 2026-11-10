@@ -119,7 +119,7 @@ public class StorePanel implements CustomVisualDialogDelegate, CustomUIPanelPlug
         holder.setActionListenerDelegate((inputEvent, data) -> buttonPressed(data));
 
         holder.setParaInsigniaLarge();
-        LabelAPI title = holder.addPara("The Ledger", Misc.getBasePlayerColor(), 0f);
+        LabelAPI title = holder.addPara(ngprenewed.LedgerSpawner.NAME, Misc.getBasePlayerColor(), 0f);
         title.getPosition().inTL(PAD, 16f);
         holder.setParaFontDefault();
 
@@ -272,7 +272,7 @@ public class StorePanel implements CustomVisualDialogDelegate, CustomUIPanelPlug
             messageColor = Misc.getPositiveHighlightColor();
             Global.getSoundPlayer().playUISound("ui_cargo_special_tech_drop", 1f, 1f);
         } else {
-            message = "The Ledger declines.";
+            message = "The station declines.";
             messageColor = Misc.getNegativeHighlightColor();
         }
     }

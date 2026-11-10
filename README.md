@@ -1,6 +1,6 @@
 # New Game Plus - Renewed
 
-Every level you gain, in any save, earns career points. Every new game opens a store, the Ledger,
+Every level you gain, in any save, earns career points. Every new game opens a store, Legacy Station,
 next to your starting fleet. Spend your career points there on a head start.
 
 ## How it works
@@ -24,7 +24,7 @@ next to your starting fleet. Spend your career points there on a head start.
 - **The feats above are achievements too.** Each sits in the tab of its mod, the base game ones in
   the first tab. When Rule Book - Renewed has an achievement for the same thing (At the Gates, for
   example), the list shows it once and it pays the feat's points.
-- **The Ledger** appears near your fleet when a game starts (or the first time you load an older save
+- **Legacy Station** appears near your fleet when a game starts (or the first time you load an older save
   with the mod installed). It stays for the whole game and is marked on the intel screen.
 - **The store** has tabs and a scrolling list. Click Buy, then Confirm. Story points, skill points,
   levels and credits apply at once. Goods wait in the delivery bay and you take them through the usual

@@ -65,3 +65,7 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   `ShipItems.sync` puts it back if a refit drops it.
 - `perks/StoragePerk` - the +10% capacity perk, a hidden `npc_only` skill on the player.
 - `rules.csv` hands the Ledger's dialog to `LedgerDialog` via `NGP_OpenLedger`.
+- Players see the station as **Legacy Station** (0.7.4, Andrzej disliked "the Ledger"); classes and ids
+  keep the old `ledger` names so saves load. Its entity type needs the tag `has_interaction_dialog`, or the
+  game draws it but never lets the player click it; `LedgerSpawner.fixUp` adds the tag and the name to
+  stations in older saves.

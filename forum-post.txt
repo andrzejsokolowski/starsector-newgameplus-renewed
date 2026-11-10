@@ -21,7 +21,7 @@ Needs LunaLib and Achievements - Renewed.
 [li]The feats are achievements too, each in the tab of its mod. With Rule Book - Renewed, a feat it also has shows up once.[/li]
 [/list]
 
-[hr][center][size=12pt][b]The Ledger[/b][/size][/center][hr]
+[hr][center][size=12pt][b]Legacy Station[/b][/size][/center][hr]
 [list]
 [li]A station that appears next to your fleet when a game starts, or the first time you load an older save with the mod installed.[/li]
 [li]It stays for the whole game and has its own intel entry, so you can always find it on the map.[/li]
@@ -43,7 +43,7 @@ Needs LunaLib and Achievements - Renewed.
 [hr][center][size=12pt][b]Settings and compatibility[/b][/size][/center][hr]
 [list]
 [li]LunaLib settings: extra career points (set your total by hand), points per level, store price multiplier.[/li]
-[li]Works with Nexerelin starts: the Ledger waits until your fleet is placed.[/li]
+[li]Works with Nexerelin starts: Legacy Station waits until your fleet is placed.[/li]
 [li]With Rule Book - Renewed, harder rules earn more career points and easier rules fewer.[/li]
 [li]Can be added to a game in progress.[/li]
 [/list]
@@ -60,6 +60,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.7.4[/b]
+[list][li]The store station is now called Legacy Station, and it can be clicked: before, it showed up but could not be flown to or talked to. Stations in existing saves are fixed on load.[/li][li]The other "Ledger" texts are renamed too: messages now say "Your legacy grows", and the storage perk is now Deep Holds.[/li][/list]
 [b]0.7.3[/b]
 [list][li]The hull mods the ship items add are renamed: Ledger Refit is now Hull Upgrades, Ledger Mount Rails is now Extra Ordnance Points.[/li][/list]
 [b]0.7.2[/b]

@@ -9,10 +9,10 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.Color;
 import java.util.Set;
 
-/** Keeps the Ledger on the intel screen so it can always be found on the map. */
+/** Keeps Legacy Station on the intel screen so it can always be found on the map. */
 public class LedgerIntel extends BaseIntelPlugin {
 
-    public static final String TAG = "Ledger";
+    public static final String TAG = "Legacy Station";
 
     private final SectorEntityToken ledger;
 
@@ -23,7 +23,7 @@ public class LedgerIntel extends BaseIntelPlugin {
 
     @Override
     public String getName() {
-        return "The Ledger";
+        return LedgerSpawner.NAME;
     }
 
     @Override
