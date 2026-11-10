@@ -1,5 +1,3 @@
-Subject: [0.98a] New Game Plus - Renewed 0.7.0 - career points from every save, spent on a head start in the next one
-
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/releases/latest][b]New Game Plus - Renewed[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-newgameplus-renewed/main/graphics/ngp/ngp_icon.png[/img]
 [url=https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/releases/latest][img]https://img.shields.io/github/downloads/andrzejsokolowski/starsector-newgameplus-renewed/total?style=for-the-badge&label=download[/img][/url]  [url=https://github.com/andrzejsokolowski/starsector-newgameplus-renewed][img]https://img.shields.io/github/v/release/andrzejsokolowski/starsector-newgameplus-renewed?display_name=tag&sort=semver&style=for-the-badge&label=source[/img][/url]
