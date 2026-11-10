@@ -13,8 +13,11 @@ The design and every decision Andrzej made: Claude Information page "New Game Pl
 
 ## Licence and clean room
 
-No code, text or art from Unofficial New Game Plus (Originem, all rights reserved). This mod is
-written from scratch. StarterPack (Andrzej's own mod) may be reused freely.
+Unofficial New Game Plus (Originem): Andrzej got the author's yes to continue its work and said on
+2026-11-10 that its code and art may be used here too. Its licence still reads "DO NOT copy entirely.
+All rights reserved", so take only parts, credit Originem in the file and in CREDITS, and change the
+CC0 licence line of the forum post for anything taken. Nothing of it is used so far. StarterPack
+(Andrzej's own mod) may be reused freely.
 
 ## Build
 
@@ -40,6 +43,14 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   flag, check flag|equals|skill, value). Flag may join keys with & (all) or | (any). getBoolean also
   reads the text "true" that rules.csv stores. Paid once per PROFILE: `Career.payFeat` marks `feats.<id>` in career.json in the same write.
   `OmegaBattleListener` sets `$ngp_defeatedOmega` (the game has no flag for it).
+  Every feat is an achievement in Achievements - Renewed (required since 0.6.0), registered from
+  code in onApplicationLoad as `ngp_<feat id>` with `FeatAchievement` as its check. Column `shared`
+  names another mod's achievement with the same condition (Rule Book's `rbr_atg` and so on); when it
+  exists the feat pays on it and registers none of its own. `FeatPayer` (listener) pays at once,
+  `Feats.check` in CampaignScript pays anything missed and marks own achievements done for feats paid
+  before 0.6.0.
+- Rule Book - Renewed's achievement `rbr_ngp_ledger` checks the fleet for hull mod id
+  `ngp_ledger_refit`. Never rename it.
 - `store/StorePanel` - the store screen. All buttons in ONE tooltip element covering the whole panel
   at inTL(0,0) (offset elements never get clicks). Row text in separate button-free elements.
 - `ships/` - the Shipyard items (special items with a right-click dialog). S-mod slots and stat boosts

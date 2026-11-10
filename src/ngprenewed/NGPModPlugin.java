@@ -2,6 +2,8 @@ package ngprenewed;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import achievementsrenewed.api.Achievements;
+import ngprenewed.feats.FeatPayer;
 import ngprenewed.feats.Feats;
 import ngprenewed.feats.OmegaBattleListener;
 import ngprenewed.store.StoreCatalog;
@@ -26,5 +28,6 @@ public class NGPModPlugin extends BaseModPlugin {
             Global.getSector().addTransientScript(new CampaignScript());
         }
         Global.getSector().addTransientListener(new OmegaBattleListener());
+        Achievements.addListener(new FeatPayer());
     }
 }

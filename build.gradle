@@ -24,6 +24,9 @@ dependencies {
     compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/LunaLib.jar')
     // Peerless Skills (optional): its public API awards Peerless points. Only used when that mod is on.
     compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/PeerlessSkills*.jar')
+    // Achievements - Renewed checks and lists the feats. Built next door, or found among the installed mods.
+    compileOnly files('../Achievements - Renewed/jars/AchievementsRenewed.jar')
+    compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/AchievementsRenewed.jar')
 }
 
 jar {
@@ -143,21 +146,43 @@ tasks.register('checkReleaseFiles') {
             if (cols.length <= costCol || !(cols[costCol].trim() ==~ /\d+/)) problems << "Store item cost is not a whole number in: ${line}"
         }
 
-        // Every feat needs whole-number points, a flag and a check kind the code knows.
+        // Every feat needs whole-number points, a flag, a check kind the code knows and its achievement texts.
+        def parseCsv = { String line ->
+            def cells = []
+            def cell = new StringBuilder()
+            boolean quoted = false
+            for (int i = 0; i < line.length(); i++) {
+                char c = line.charAt(i)
+                if (quoted) {
+                    if (c == '"' as char && i + 1 < line.length() && line.charAt(i + 1) == '"' as char) { cell.append('"'); i++ }
+                    else if (c == '"' as char) quoted = false
+                    else cell.append(c)
+                } else if (c == '"' as char) quoted = true
+                else if (c == ',' as char) { cells << cell.toString().trim(); cell.setLength(0) }
+                else cell.append(c)
+            }
+            cells << cell.toString().trim()
+            cells
+        }
         def featLines = file('data/campaign/ngp_feats.csv').readLines('UTF-8').findAll { it.trim() && !it.startsWith('#') }
-        def featHeader = featLines[0].split(',')*.trim()
-        def fPoints = featHeader.indexOf('points')
-        def fFlag = featHeader.indexOf('flag')
-        def fCheck = featHeader.indexOf('check')
-        def fValue = featHeader.indexOf('value')
-        if ([fPoints, fFlag, fCheck, fValue].any { it < 0 }) problems << 'ngp_feats.csv needs points, flag, check and value columns'
-        else featLines.drop(1).each { line ->
-            def cols = line.split(',', -1)*.trim()
-            def check = cols.size() > fCheck ? cols[fCheck] : ''
-            if (!(cols.size() > fPoints && cols[fPoints] ==~ /\d+/)) problems << "Feat points are not a whole number in: ${line}"
-            if (!(cols.size() > fFlag && cols[fFlag])) problems << "Feat has no flag in: ${line}"
-            if (!(check in ['', 'flag', 'equals', 'skill'])) problems << "Unknown feat check in: ${line}"
-            if (check == 'equals' && !(cols.size() > fValue && cols[fValue])) problems << "Feat check equals needs a value in: ${line}"
+        def featHeader = parseCsv(featLines[0])
+        def needed = ['id', 'name', 'points', 'flag', 'check', 'value', 'shared', 'hint', 'howTo']
+        def missingCols = needed.findAll { !featHeader.contains(it) }
+        if (missingCols) problems << "ngp_feats.csv has no ${missingCols.join(', ')} column"
+        else {
+            def featIds = [] as Set
+            featLines.drop(1).each { line ->
+                def cols = parseCsv(line)
+                if (cols.size() != featHeader.size()) { problems << "Feat row has ${cols.size()} cells, header has ${featHeader.size()}: ${line.take(40)}"; return }
+                def cell = { String name -> cols[featHeader.indexOf(name)] }
+                def check = cell('check')
+                if (!featIds.add(cell('id'))) problems << "Feat id ${cell('id')} is used twice"
+                if (!(cell('points') ==~ /\d+/)) problems << "Feat points are not a whole number in: ${line}"
+                if (!cell('flag')) problems << "Feat has no flag in: ${line}"
+                if (!(check in ['', 'flag', 'equals', 'skill'])) problems << "Unknown feat check in: ${line}"
+                if (check == 'equals' && !cell('value')) problems << "Feat check equals needs a value in: ${line}"
+                if (!cell('name') || !cell('hint') || !cell('howTo')) problems << "Feat ${cell('id')} needs a name, hint and howTo"
+            }
         }
 
         if (problems) throw new GradleException("Release files are not ready:\n  " + problems.join('\n  '))

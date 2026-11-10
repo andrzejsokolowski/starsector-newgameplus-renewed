@@ -1,44 +1,45 @@
-id,name,points,requiresMod,memory,flag,check,value
-# Feats pay career points once per profile. memory: sector or player. requiresMod: a mod id or empty.,,,,,,,
-# check: flag (default; join keys with & for all or | for any) / equals (the key holds value) / skill (the player has the skill named in flag).,,,,,,,
-at_the_gates,At the Gates,20,,sector,$gaATG_missionCompleted,,
-planetkiller,The Planetkiller recovered,20,,sector,$pk_recovered,,
-omega,An Omega fleet beaten,30,,sector,$ngp_defeatedOmega,,
-ziggurat,The Ziggurat defeated,20,,sector,$defeatedZiggurat,,
-academy,The Galatia Academy story,10,,sector,$gaKA_missionCompleted,,
-usurpers,The Usurpers,10,,sector,$sdtu_missionCompleted,,
-knight_errant,The Knight Errant,10,,sector,$lke_missionCompleted,,
-duel,A duel won,5,,player,$soe_wonDuel,,
-kanta,Kanta's protection,5,,player,$everHadKantaProtection,,
-hot_masterwork,Isa's masterwork,10,ship_trophy_room,sector,$ship_trophy_room_isa_masterwork_completed,,
-hot_gan_eden,Gan Eden,30,ship_trophy_room,sector,$shipTrophyGanEdenQuestStage,equals,COMPLETED
-sotf_a_memory,A Memory,15,secretsofthefrontier,sector,$sotf_AMemoryCompleted,,
-sotf_wayward_star,The Wayward Star,30,secretsofthefrontier,sector,$sotf_WSCombatWon,,
-sotf_lost_thread,A Lost Thread,10,secretsofthefrontier,sector,$sotf_lostthread_completed,,
-sotf_hypnos,Legacy of Hypnos,10,secretsofthefrontier,sector,$sotf_loh_completed,,
-sotf_barrow,Annex-Barrow defeated,15,secretsofthefrontier,sector,$sotf_defeatedBarrow,,
-sotf_hallowhall,Hope for Hallowhall,10,secretsofthefrontier,sector,$sotf_completedHFH,,
-rat_singularity,The Singularity at the bottom of the Abyss,30,assortment_of_things,player,rat_abyssal_requiem,skill,
-kol_tritachyon,The Tri-Tachyon black site,20,knights_of_ludd,sector,$zea_defeatedNineveh,,
-kol_elysia,Elysia,20,knights_of_ludd,sector,$zea_elysian_boss1_done&$zea_elysian_boss2_done,,
-kol_dawn,Dawn,15,knights_of_ludd,sector,$zea_dawn_boss_done,,
-kol_dusk,Dusk,15,knights_of_ludd,sector,$zea_dusk_boss_done,,
-heggie_tales,Heggie Tales,15,eluxor_hegtales,sector,$hegtales_Quest3_missionCompleted,,
-sol_deterrent,The Deterrent,30,sol_renewed,sector,$sr_crisis_deterred,,
-sol_transfer,Transferring Sol,5,sol_renewed,sector,$sr_quest_stage,equals,DONE
-nex_salvation,Salvation,30,nexerelin,sector,$nex_remSalvation_missionCompleted,,
-sephira_burning_storm,Operation Burning Storm,20,bb_plus,sector,$BBPOperationBS_completed,,
-liminal_crisis,The Liminal Crisis,20,liminal,sector,$liminal_crisis_end,,
-wwlb_iaiic,The IAIIC crisis,30,niko_morePlanetaryConditions,sector,$MPC_IAIICDefeated,,
-wwlb_manufactorum,The Omega Manufactorum,20,niko_morePlanetaryConditions,sector,$MPC_playerFinishedOmegaManufactorum,,
-dpl_prometheus,Project Prometheus,20,dpl_phase_lab,sector,$dpl_PrometheusCompleted,,
-dpl_helheim,The Helheim Supremacy,10,dpl_phase_lab,player,$dpl_crisisFinishedBadGuy|$dpl_defeatedDPLAttack,,
-diable_first_relay,The First Relay,20,diableavionics,sector,$da_gulf_part2_complete,,
-et_thousand_cuts,A Thousand Cuts,20,EmergentThreats_Vice,sector,$vice_thousand_cuts_succeeded,,
-et_shattered_fortress,Shattered Fortress,15,EmergentThreats_Vice,sector,$vice_shattered_fortress_succeeded,,
-hsi_culann,The Culann mission,15,HaloDynamicsShipIndustry,sector,$HSI_TTMission_Finished,,
-babel_protocol,Babel Protocol,15,babylon,sector,$baby_babylon_bounty_succeeded,,
-crab_radiance,Dream No More,20,crabshack,sector,$cs_defeatedRadiance,,
-tahlan_opis,The Elegy of Opis,15,tahlanadditions,sector,$sb_elegyOfOpisCompleted,,
-tahlan_illustrious,The Illustrious,10,tahlanadditions,sector,$sb_viceTour,equals,10
-uaf_tilted_dagger,Tilted Dagger,15,uaf,sector,$UAFTiltedDaggerMissionPartThree_Completed&$UAFTiltedDaggerPartThree_GoodConclusion,,
+id,name,points,requiresMod,memory,flag,check,value,shared,hint,howTo
+# Feats pay career points once per profile. memory: sector or player. requiresMod: a mod id or empty.,,,,,,,,,,
+# check: flag (default; join keys with & for all or | for any) / equals (the key holds value) / skill (the player has the skill named in flag).,,,,,,,,,,
+# Each feat is an achievement in Achievements - Renewed (id ngp_<feat id>). shared: an achievement of another mod with the same condition; when it exists the feat pays on it and adds none of its own. hint and howTo are the achievement texts.,,,,,,,,,,
+at_the_gates,Finish At the Gates,20,,sector,$gaATG_missionCompleted,,,rbr_atg,Make the Gates work again,Finish the mission At the Gates from the Galatia Academy.
+planetkiller,Recover the planetkiller,20,,sector,$pk_recovered,,,rbr_planetkiller,Find a weapon that should have stayed lost,Salvage the planetkiller at the end of the mission The Scythe of Orion.
+omega,Defeat an Omega fleet,30,,sector,$ngp_defeatedOmega,,,,Win against something from beyond,Win a battle with an Omega fleet on the enemy side.
+ziggurat,Defeat the Ziggurat,20,,sector,$defeatedZiggurat,,,rbr_ziggurat,Something still guards Alpha Site,Defeat the Ziggurat in battle at Alpha Site.
+academy,Finish The Kallichore Archive,10,,sector,$gaKA_missionCompleted,,,rbr_academy,The Academy wants its old records back,Finish the mission The Kallichore Archive from the Galatia Academy.
+usurpers,Finish The Usurpers,10,,sector,$sdtu_missionCompleted,,,rbr_usurpers,Get involved in Sindrian politics,Finish the mission The Usurpers.
+knight_errant,Finish Knight Errant,10,,sector,$lke_missionCompleted,,,rbr_knight,Look for a missing Knight of Ludd,Finish the mission Knight Errant from Archcurate Jaspis on Gilead.
+duel,Win the duel on Eventide,5,,player,$soe_wonDuel,,,rbr_duel,Settle a matter of honor with a blade,Win the duel at the ball on Eventide during the mission Princess of Persea.
+kanta,Earn Kanta's protection,5,,player,$everHadKantaProtection,,,rbr_kanta,Make a powerful pirate friend,Earn Warlord Kanta's protection at Kanta's Den.
+hot_masterwork,Finish Isa's masterwork,10,ship_trophy_room,sector,$ship_trophy_room_isa_masterwork_completed,,,,A shipwright has one last project,Finish Isa's masterwork quest from Hall of Triumph.
+hot_gan_eden,Finish Gan Eden,30,ship_trophy_room,sector,$shipTrophyGanEdenQuestStage,equals,COMPLETED,,Look for a garden among the stars,Finish the Gan Eden quest from Hall of Triumph.
+sotf_a_memory,Finish A Memory,15,secretsofthefrontier,sector,$sotf_AMemoryCompleted,,,,Someone remembers more than they should,Finish the Secrets of the Frontier mission A Memory.
+sotf_wayward_star,Win at The Wayward Star,30,secretsofthefrontier,sector,$sotf_WSCombatWon,,,,A star has strayed from its course,Win the battle of the Secrets of the Frontier mission The Wayward Star.
+sotf_lost_thread,Finish A Lost Thread,10,secretsofthefrontier,sector,$sotf_lostthread_completed,,,,Pick up a thread someone dropped,Finish the Secrets of the Frontier mission A Lost Thread.
+sotf_hypnos,Finish Legacy of Hypnos,10,secretsofthefrontier,sector,$sotf_loh_completed,,,,An old project still dreams,Finish the Secrets of the Frontier mission Legacy of Hypnos.
+sotf_barrow,Defeat Annex-Barrow,15,secretsofthefrontier,sector,$sotf_defeatedBarrow,,,,Something waits in the barrow,Defeat Annex-Barrow from Secrets of the Frontier.
+sotf_hallowhall,Finish Hope for Hallowhall,10,secretsofthefrontier,sector,$sotf_completedHFH,,,,A world is running out of hope,Finish the Secrets of the Frontier mission Hope for Hallowhall.
+rat_singularity,Defeat the Singularity in the Abyss,30,assortment_of_things,player,rat_abyssal_requiem,skill,,,Go all the way down,Defeat the Singularity at the bottom of the Abyss from Random Assortment of Things.
+kol_tritachyon,Defeat the Tri-Tachyon black site,20,knights_of_ludd,sector,$zea_defeatedNineveh,,,,Tri-Tachyon hides something in the dark,Defeat Nineveh at the Tri-Tachyon black site from Knights of Ludd.
+kol_elysia,Defeat both guardians of Elysia,20,knights_of_ludd,sector,$zea_elysian_boss1_done&$zea_elysian_boss2_done,,,,Two keepers guard a holy place,Defeat both bosses of Elysia from Knights of Ludd.
+kol_dawn,Defeat the boss of Dawn,15,knights_of_ludd,sector,$zea_dawn_boss_done,,,,Wait for the light,Defeat the boss of Dawn from Knights of Ludd.
+kol_dusk,Defeat the boss of Dusk,15,knights_of_ludd,sector,$zea_dusk_boss_done,,,,Wait for the dark,Defeat the boss of Dusk from Knights of Ludd.
+heggie_tales,Finish Heggie Tales,15,eluxor_hegtales,sector,$hegtales_Quest3_missionCompleted,,,,The Hegemony has stories to tell,Finish the third Heggie Tales quest.
+sol_deterrent,Deter the Sol crisis,30,sol_renewed,sector,$sr_crisis_deterred,,,rbr_sol_crisis,Old Earth will not go quietly,Finish the Sol Renewed crisis Discovering the Past with The Deterrent.
+sol_transfer,Bring Sol into the Sector,5,sol_renewed,sector,$sr_quest_stage,equals,DONE,rbr_sol_quest,Bring an old star home,Finish the Sol Renewed quest Transferring Sol.
+nex_salvation,Finish Salvation,30,nexerelin,sector,$nex_remSalvation_missionCompleted,,,,The machines plan their return,Finish the Nexerelin Remnant mission Salvation.
+sephira_burning_storm,Finish Operation Burning Storm,20,bb_plus,sector,$BBPOperationBS_completed,,,,A storm gathers over Sephira,Finish the Sephira Conclave mission Operation Burning Storm.
+liminal_crisis,End the Liminal Crisis,20,liminal,sector,$liminal_crisis_end,,,,Something presses in from between,Bring the Liminal Crisis to its end.
+wwlb_iaiic,Defeat the IAIIC,30,niko_morePlanetaryConditions,sector,$MPC_IAIICDefeated,,,,An alliance comes for your cores,Defeat the IAIIC crisis from What We Left Behind.
+wwlb_manufactorum,Finish the Omega Manufactorum,20,niko_morePlanetaryConditions,sector,$MPC_playerFinishedOmegaManufactorum,,,,Something builds where no one works,Finish the Omega Manufactorum from What We Left Behind.
+dpl_prometheus,Finish Project Prometheus,20,dpl_phase_lab,sector,$dpl_PrometheusCompleted,,,,Steal fire from a phase lab,Finish Project Prometheus from Domain Phase Lab.
+dpl_helheim,Settle the Helheim Supremacy,10,dpl_phase_lab,player,$dpl_crisisFinishedBadGuy|$dpl_defeatedDPLAttack,,,,A supremacy rises from the cold,"End the Helheim Supremacy crisis from Domain Phase Lab, or defeat its attack."
+diable_first_relay,Finish The First Relay,20,diableavionics,sector,$da_gulf_part2_complete,,,,Find the first of many,Finish part two of the Diable Avionics mission The First Relay.
+et_thousand_cuts,Finish A Thousand Cuts,20,EmergentThreats_Vice,sector,$vice_thousand_cuts_succeeded,,,,Death by a thousand cuts,Finish the Emergent Threats mission A Thousand Cuts.
+et_shattered_fortress,Finish Shattered Fortress,15,EmergentThreats_Vice,sector,$vice_shattered_fortress_succeeded,,,,A fortress lies in pieces,Finish the Emergent Threats mission Shattered Fortress.
+hsi_culann,Finish the Culann mission,15,HaloDynamicsShipIndustry,sector,$HSI_TTMission_Finished,,,,Tri-Tachyon wants a favour,Finish the Halo Dynamics mission for Culann.
+babel_protocol,Finish Babel Protocol,15,babylon,sector,$baby_babylon_bounty_succeeded,,,,A tower of voices calls,Win the Core of Babel bounty Babel Protocol.
+crab_radiance,Defeat the Radiance,20,crabshack,sector,$cs_defeatedRadiance,,,,Dream no more,Defeat the Radiance from Crab Shack.
+tahlan_opis,Finish The Elegy of Opis,15,tahlanadditions,sector,$sb_elegyOfOpisCompleted,,,,A lament for a lost world,Finish the Tahlan Additions mission The Elegy of Opis.
+tahlan_illustrious,Finish the Illustrious tour,10,tahlanadditions,sector,$sb_viceTour,equals,10,,Show a ship the Sector,Finish all ten stops of the Illustrious tour from Tahlan Additions.
+uaf_tilted_dagger,Finish Tilted Dagger well,15,uaf,sector,$UAFTiltedDaggerMissionPartThree_Completed&$UAFTiltedDaggerPartThree_GoodConclusion,,,,"A dagger, slightly tilted",Finish part three of the United Aurora Federation mission Tilted Dagger with the good ending.
