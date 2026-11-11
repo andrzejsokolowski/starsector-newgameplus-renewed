@@ -61,6 +61,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.8.1[/b]
+[list][li]Set career points for the 127 quest achievements of Achievements - Renewed 0.4.0: 2 to 30 points each by the size of the quest, instead of the default 5.[/li][/list]
 [b]0.8.0[/b]
 [list][li]New Perks tab. Deep Holds moved there, and eight new perks: Time Flow (+1 percent time flow), Extra Armor (+50 armor), Last Stand (once per battle each ship repairs 10 percent of its hull instead of being destroyed), Slow Moving (+1 slow-moving burn level), Max Burn (+1), Lean Maintenance (-10 percent supplies per month), Combat Readiness (+5 percent maximum) and Sensor Range (+10 percent).[/li][li]With Second-in-Command, perks are listed on its Non-Executive Skills page.[/li][li]Rare tab: every colony item the game knows, modded ones included (Tenebrian, Auroran and so on), 1 per game each. New cores: Alpha core (25), Babylon core with Core of Babel (80), Primordial core with Random Assortment of Things (60).[/li][li]The Tenebrian Nanoforge now costs 50 points, priced like the other colony items by its value.[/li][li]Heavy machinery removed from Logistics.[/li][li]The Armoury tab is now spelled Armory.[/li][li]Item, hull mod, perk and station texts rewritten as plain descriptions of what they do.[/li][/list]
 [b]0.7.5[/b]

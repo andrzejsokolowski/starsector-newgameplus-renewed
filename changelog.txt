@@ -1,3 +1,6 @@
+Version 0.8.1 (2026-11-11)
+- Set career points for the 127 quest achievements of Achievements - Renewed 0.4.0: 2 to 30 points each by the size of the quest, instead of the default 5.
+
 Version 0.8.0 (2026-11-11)
 - New Perks tab. Deep Holds moved there, and eight new perks: Time Flow (+1% time flow), Extra Armor (+50 armor), Last Stand (once per battle each ship repairs 10% of its hull instead of being destroyed), Slow Moving (+1 slow-moving burn level), Max Burn (+1), Lean Maintenance (-10% supplies per month), Combat Readiness (+5% maximum) and Sensor Range (+10%).
 - With Second-in-Command, perks are listed on its Non-Executive Skills page.
