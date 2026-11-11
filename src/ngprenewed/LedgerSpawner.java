@@ -61,7 +61,7 @@ public final class LedgerSpawner {
 
         LedgerIntel intel = new LedgerIntel(ledger);
         Global.getSector().getIntelManager().addIntel(intel, true);
-        ui.addMessage(NAME + " has opened its doors near your fleet.", Misc.getHighlightColor());
+        ui.addMessage(NAME + " is near your fleet.", Misc.getHighlightColor());
     }
 
     /**

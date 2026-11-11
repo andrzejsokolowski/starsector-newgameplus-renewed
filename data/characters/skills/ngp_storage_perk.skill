@@ -1,6 +1,6 @@
 {
 	"id":"ngp_storage_perk",
-	"governingAptitude":"industry",
+	"governingAptitude":"ngp_perks",
 	"compressHullmods":false,
 	"scope":"ALL_SHIPS",
 	"effectGroups":[

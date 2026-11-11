@@ -1,3 +1,12 @@
+Version 0.8.0 (2026-11-11)
+- New Perks tab. Deep Holds moved there, and eight new perks: Time Flow (+1% time flow), Extra Armor (+50 armor), Last Stand (once per battle each ship repairs 10% of its hull instead of being destroyed), Slow Moving (+1 slow-moving burn level), Max Burn (+1), Lean Maintenance (-10% supplies per month), Combat Readiness (+5% maximum) and Sensor Range (+10%).
+- With Second-in-Command, perks are listed on its Non-Executive Skills page.
+- Rare tab: every colony item the game knows, modded ones included (Tenebrian, Auroran and so on), 1 per game each. New cores: Alpha core (25), Babylon core with Core of Babel (80), Primordial core with Random Assortment of Things (60).
+- The Tenebrian Nanoforge now costs 50 points, priced like the other colony items by its value.
+- Heavy machinery removed from Logistics.
+- The Armoury tab is now spelled Armory.
+- Item, hull mod, perk and station texts rewritten as plain descriptions of what they do.
+
 Version 0.7.5 (2026-11-10)
 - The store screen is rebuilt: it fills most of the screen, the list scrolls smoothly with the mouse wheel, and the tabs can be clicked.
 - Points to spend are now your whole career total less what this game has spent, so points earned in the current game can be spent at once.

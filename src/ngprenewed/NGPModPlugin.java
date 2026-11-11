@@ -19,6 +19,7 @@ public class NGPModPlugin extends BaseModPlugin {
     public void onApplicationLoad() {
         StoreCatalog.load();
         Feats.load();
+        ngprenewed.perks.Perks.showInSecondInCommand();
         Rewards.load();
     }
 
@@ -26,6 +27,7 @@ public class NGPModPlugin extends BaseModPlugin {
     public void onGameLoad(boolean newGame) {
         Career.reload();
         if (SaveState.get() == null) SaveState.create();
+        StoreCatalog.addColonyItems();
         if (!Global.getSector().hasTransientScript(CampaignScript.class)) {
             Global.getSector().addTransientScript(new CampaignScript());
         }

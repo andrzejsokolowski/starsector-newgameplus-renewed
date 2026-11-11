@@ -37,9 +37,7 @@ public class LedgerDialog implements InteractionDialogPlugin {
             dialog.getVisualPanel().showImageVisual(target.getCustomInteractionDialogImageVisual());
         }
         TextPanelAPI text = dialog.getTextPanel();
-        text.addPara("The station answers before you hail it. A calm voice reads out your name, then a list "
-                + "of other names, other ships, other lives. Every one of them is yours. Every one of them is "
-                + "owed something.");
+        text.addPara(LedgerSpawner.NAME + " sells items for career points.");
         showBudget();
         showOptions();
     }

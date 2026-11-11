@@ -57,15 +57,14 @@ public class LedgerIntel extends BaseIntelPlugin {
     @Override
     public void createSmallDescription(TooltipMakerAPI info, float width, float height) {
         Color h = Misc.getHighlightColor();
-        info.addPara("An automated exchange that settles debts no one remembers incurring. It knows your name, "
-                + "and it knows every captain you have ever been.", 10f);
+        info.addPara("Sells items for career points.", 10f);
         if (ledger != null && ledger.getContainingLocation() != null) {
-            info.addPara("It waits in %s.", 10f, h, ledger.getContainingLocation().getNameWithLowercaseType());
+            info.addPara("Location: %s.", 10f, h, ledger.getContainingLocation().getNameWithLowercaseType());
         }
         SaveState state = SaveState.get();
         if (state != null) {
             info.addPara("Points to spend: %s.", 10f, h, String.valueOf(state.budget()));
-            info.addPara("Career points across all your lives: %s.", 3f, h, String.valueOf(Career.total()));
+            info.addPara("Career points: %s.", 3f, h, String.valueOf(Career.total()));
         }
     }
 

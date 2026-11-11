@@ -1,0 +1,12 @@
+{
+	"id":"aptitude_ngp_perks",
+	"governingAptitude":"ngp_perks",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":0,
+			"effects":[
+				{"type":"DESCRIPTION", "script":"ngprenewed.perks.Perks$Aptitude"},
+			]
+		},
+	],
+}

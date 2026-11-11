@@ -304,7 +304,7 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
             message(goodsGoToBay(r.item) ? r.item.name + ": waiting in the delivery bay." : r.item.name + ": done.", GREEN);
             Global.getSoundPlayer().playUISound("ui_cargo_special_tech_drop", 1f, 1f);
         } else {
-            message("The station declines.", RED);
+            message("Purchase failed.", RED);
         }
     }
 

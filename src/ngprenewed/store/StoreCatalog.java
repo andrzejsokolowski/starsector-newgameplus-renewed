@@ -2,6 +2,8 @@ package ngprenewed.store;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SpecialItemSpecAPI;
+import com.fs.starfarer.api.impl.campaign.econ.impl.ItemEffectsRepo;
+import com.fs.starfarer.api.loading.IndustrySpecAPI;
 import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.campaign.FactionSpecAPI;
 import com.fs.starfarer.api.campaign.econ.CommoditySpecAPI;
@@ -28,7 +30,7 @@ import java.util.TreeMap;
 /**
  * Every store item, read once at game start from data/campaign/ngp_store_items.csv (merged across
  * mods, so another mod can add lines). Items that need a missing mod, or name a commodity or special
- * item that does not exist, are left out. The Armoury tab is built from the loaded factions instead:
+ * item that does not exist, are left out. The Armory tab is built from the loaded factions instead:
  * one weapon pack per faction, so modded factions appear by themselves.
  */
 public final class StoreCatalog {
@@ -41,7 +43,10 @@ public final class StoreCatalog {
     private static final List<String> tabs = new ArrayList<>();
     private static final Map<String, List<String>> packWeapons = new HashMap<>();
 
-    public static final String ARMOURY = "Armoury";
+    public static final String ARMORY = "Armory";
+    public static final String RARE = "Rare";
+    /** Store item ids of the colony items made in code start with this. */
+    private static final String COLONY_PREFIX = "colony_";
     /** Copies of every weapon in a pack. */
     public static final int PACK_COPIES = 2;
     /** A faction needs this many weapons to get a pack. */
@@ -85,6 +90,69 @@ public final class StoreCatalog {
         }
         tabs.addAll(tabOrder);
         log.info("New Game Plus - Renewed: " + items.size() + " store items in " + tabs.size() + " tabs.");
+    }
+
+    /**
+     * Every colony item the game knows goes to the Rare tab, one per game each (Andrzej, 2026-11-11: "all
+     * colony items (auroran ones, tenebrian ones, normal ones)"). A colony item is a special item with an
+     * entry in ItemEffectsRepo.ITEM_EFFECTS (where vanilla, AoTD's Tenebrian items and UAF's Auroran items
+     * register what they do) or the colony_item tag. Runs on every game load, because mods fill that map
+     * in their own plugins. Items a CSV row already sells are skipped. Price from the item's base value.
+     */
+    public static void addColonyItems() {
+        Set<String> sold = new HashSet<>();
+        for (java.util.Iterator<StoreItem> it = items.iterator(); it.hasNext(); ) {
+            StoreItem item = it.next();
+            if (item.id.startsWith(COLONY_PREFIX)) it.remove();
+            else if ("special_item".equals(item.kind)) sold.add(item.target);
+        }
+        Set<String> effects;
+        try {
+            effects = new HashSet<>(ItemEffectsRepo.ITEM_EFFECTS.keySet());
+        } catch (Throwable t) {
+            effects = new HashSet<>();
+        }
+        List<StoreItem> found = new ArrayList<>();
+        for (SpecialItemSpecAPI spec : Global.getSettings().getAllSpecialItemSpecs()) {
+            if (spec == null || sold.contains(spec.getId())) continue;
+            if (!effects.contains(spec.getId()) && !spec.hasTag("colony_item")) continue;
+            String icon = spec.getIconName();
+            try {
+                Global.getSettings().loadTexture(icon);
+            } catch (Exception e) {
+                icon = DEFAULT_ICON;
+            }
+            found.add(new StoreItem(COLONY_PREFIX + spec.getId(), RARE, spec.getName(), installsIn(spec),
+                    colonyItemCost(spec), 1, "special_item", spec.getId(), 1, icon));
+        }
+        found.sort((a, b) -> a.name.compareToIgnoreCase(b.name));
+        items.addAll(found);
+        if (!tabs.contains(RARE) && !found.isEmpty()) tabs.add(0, RARE);
+        log.info("New Game Plus - Renewed: " + found.size() + " colony items in the Rare tab.");
+    }
+
+    /** 10 points plus 1 per 25000 credits of base value, 10 to 60: a Pristine Nanoforge is 20, a Tenebrian one 50. */
+    static int colonyItemCost(SpecialItemSpecAPI spec) {
+        int cost = Math.round(10f + spec.getBasePrice() / 25000f);
+        return Math.max(10, Math.min(60, cost));
+    }
+
+    /** "Colony item: Heavy Industry, Orbital Works." from the item's industry list, when it has one. */
+    private static String installsIn(SpecialItemSpecAPI spec) {
+        String params = spec.getParams();
+        if (params == null || params.trim().isEmpty()) return "Colony item.";
+        List<String> names = new ArrayList<>();
+        for (String id : params.split(",")) {
+            String industryId = id.trim();
+            if (industryId.isEmpty()) continue;
+            try {
+                IndustrySpecAPI industry = Global.getSettings().getIndustrySpec(industryId);
+                if (industry != null && !names.contains(industry.getName())) names.add(industry.getName());
+            } catch (Exception e) {
+                // not an industry id
+            }
+        }
+        return names.isEmpty() ? "Colony item." : "Colony item: " + String.join(", ", names) + ".";
     }
 
     /** org.json returns the string "null" for a JSON null, so empty cells are checked by hand. */
@@ -159,11 +227,11 @@ public final class StoreCatalog {
             List<String> ids = packableWeapons(faction.getKnownWeapons());
             if (ids.size() < PACK_MIN_WEAPONS) continue;
             packWeapons.put(faction.getId(), ids);
-            items.add(new StoreItem("weapons_" + faction.getId(), ARMOURY,
+            items.add(new StoreItem("weapons_" + faction.getId(), ARMORY,
                     faction.getDisplayName() + " weapons (" + ids.size() + ")",
-                    "Two crates of every weapon in the " + faction.getDisplayName() + " arsenal.",
+                    "Two of every weapon " + faction.getDisplayName() + " uses.",
                     PACK_COST, -1, "weapon_pack", faction.getId(), PACK_COPIES, packIcon(faction)));
-            tabOrder.add(ARMOURY);
+            tabOrder.add(ARMORY);
         }
     }
 

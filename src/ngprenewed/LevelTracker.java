@@ -18,7 +18,7 @@ public final class LevelTracker {
         Career.setLevelsPaid(state.saveId(), level);
         if (points > 0 && Global.getSector().getCampaignUI() != null) {
             Global.getSector().getCampaignUI().addMessage(
-                    "Your legacy grows: +" + points + " career point" + (points == 1 ? "" : "s"),
+                    "Level up: +" + points + " career point" + (points == 1 ? "" : "s"),
                     Misc.getPositiveHighlightColor());
         }
     }

@@ -52,15 +52,15 @@ public class ShipItemDialog implements InteractionDialogPlugin {
     private String opening() {
         switch (itemId) {
             case ShipItems.SMOD_SLOT:
-                return "A dockyard charter stamped with Legacy Station's seal. Any yard that reads it will find room for one more refit it should not be able to fit.";
+                return "Adds 1 S-mod slot to one ship.";
             case ShipItems.DMOD_REMOVAL:
-                return "A crate of parts machined to tolerances nobody has used since the Collapse. The manifest names a ship, but leaves the hull number blank.";
+                return "Removes every D-mod from one ship.";
             case ShipItems.STAT_TUNING:
-                return "A tuning kit and a note in a hand you almost recognise: one change, and make it count.";
+                return "Improves one stat of one ship. Each ship can take each stat once.";
             case ShipItems.EXTRA_OP:
-                return "Mount rails and power couplings cut for a hull that does not exist yet. They will fit whichever one you choose.";
+                return "Adds ordnance points to one ship: 2 / 6 / 15 / 40 by hull size.";
             default:
-                return "Legacy Station's work, waiting for a ship.";
+                return "Ship item from Legacy Station.";
         }
     }
 
@@ -72,7 +72,7 @@ public class ShipItemDialog implements InteractionDialogPlugin {
         } else {
             options.addOption("Choose a ship", CHOOSE);
         }
-        options.addOption("Put it away", LEAVE);
+        options.addOption("Cancel", LEAVE);
         options.setShortcut(LEAVE, Keyboard.KEY_ESCAPE, false, false, false, true);
     }
 
@@ -124,12 +124,12 @@ public class ShipItemDialog implements InteractionDialogPlugin {
     private void showBoosts() {
         OptionPanelAPI options = dialog.getOptionPanel();
         options.clearOptions();
-        dialog.getTextPanel().addPara("Which part of the " + picked.getShipName() + " gets the work?");
+        dialog.getTextPanel().addPara("Choose a stat to improve on the " + picked.getShipName() + ".");
         for (Boost boost : ShipItems.boostsLeft(picked)) {
             options.addOption(boost.label + " " + boost.amount, BOOST + boost.name());
         }
         options.addOption("Choose a different ship", CHOOSE);
-        options.addOption("Put it away", LEAVE);
+        options.addOption("Cancel", LEAVE);
         options.setShortcut(LEAVE, Keyboard.KEY_ESCAPE, false, false, false, true);
     }
 
@@ -151,7 +151,6 @@ public class ShipItemDialog implements InteractionDialogPlugin {
         used = true;
         consumeItem();
         Global.getSoundPlayer().playUISound("ui_cargo_special_tech_drop", 1f, 1f);
-        text.addPara("By the next shift change the work is done, and the yard crew cannot remember doing it.");
         text.addPara(picked.getShipName() + ": " + result(boost), Misc.getPositiveHighlightColor());
         OptionPanelAPI options = dialog.getOptionPanel();
         options.clearOptions();

@@ -133,20 +133,6 @@ tasks.register('checkReleaseFiles') {
                 problems << "rules.csv names ${command}, but src/ngprenewed/rulecmd/${command}.java does not exist"
         }
 
-        // Every store item must use a kind the code knows and a tab that exists.
-        def kinds = ['story_points', 'skill_points', 'levels', 'credits', 'commodity', 'special_item', 'perk', 'peerless_point']
-        def lines = file('data/campaign/ngp_store_items.csv').readLines('UTF-8').findAll { it.trim() && !it.startsWith('#') }
-        def header = lines[0].split(',')*.trim()
-        def kindCol = header.indexOf('kind')
-        def costCol = header.indexOf('cost')
-        if (kindCol < 0 || costCol < 0) problems << 'ngp_store_items.csv needs kind and cost columns'
-        else lines.drop(1).each { line ->
-            def cols = line.split(',', -1)
-            if (cols.length <= kindCol || !(cols[kindCol].trim() in kinds)) problems << "Unknown store item kind in: ${line}"
-            if (cols.length <= costCol || !(cols[costCol].trim() ==~ /\d+/)) problems << "Store item cost is not a whole number in: ${line}"
-        }
-
-        // Every feat needs whole-number points, a flag, a check kind the code knows and its achievement texts.
         def parseCsv = { String line ->
             def cells = []
             def cell = new StringBuilder()
@@ -164,6 +150,20 @@ tasks.register('checkReleaseFiles') {
             cells << cell.toString().trim()
             cells
         }
+        // Every store item must use a kind the code knows and a tab that exists.
+        def kinds = ['story_points', 'skill_points', 'levels', 'credits', 'commodity', 'special_item', 'perk', 'peerless_point']
+        def lines = file('data/campaign/ngp_store_items.csv').readLines('UTF-8').findAll { it.trim() && !it.startsWith('#') }
+        def header = lines[0].split(',')*.trim()
+        def kindCol = header.indexOf('kind')
+        def costCol = header.indexOf('cost')
+        if (kindCol < 0 || costCol < 0) problems << 'ngp_store_items.csv needs kind and cost columns'
+        else lines.drop(1).each { line ->
+            def cols = parseCsv(line)
+            if (cols.size() <= kindCol || !(cols[kindCol].trim() in kinds)) problems << "Unknown store item kind in: ${line}"
+            if (cols.size() <= costCol || !(cols[costCol].trim() ==~ /\d+/)) problems << "Store item cost is not a whole number in: ${line}"
+        }
+
+        // Every feat needs whole-number points, a flag, a check kind the code knows and its achievement texts.
         def featLines = file('data/campaign/ngp_feats.csv').readLines('UTF-8').findAll { it.trim() && !it.startsWith('#') }
         def featHeader = parseCsv(featLines[0])
         def needed = ['id', 'name', 'points', 'flag', 'check', 'value', 'shared', 'hint', 'howTo']

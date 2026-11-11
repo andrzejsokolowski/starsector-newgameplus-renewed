@@ -1,0 +1,15 @@
+{
+	"id":"ngp_perk_time_flow",
+	"governingAptitude":"ngp_perks",
+	"compressHullmods":false,
+	"scope":"ALL_SHIPS",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":1,
+			"effectBasedOnLevel":false,
+			"effects":[
+				{"type":"ALL_SHIPS_IN_FLEET", "script":"ngprenewed.perks.Perks$TimeFlow"},
+			]
+		},
+	],
+}

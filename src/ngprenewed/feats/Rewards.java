@@ -89,7 +89,7 @@ public final class Rewards {
     /** Pays one achievement the moment it is done, with a message. */
     static void payNow(SaveState state, AchievementSpec spec) {
         int paid = pay(state, spec);
-        if (paid > 0) message("Your legacy grows: +" + paid + " career points");
+        if (paid > 0) message("Achievement: +" + paid + " career points");
     }
 
     /**
@@ -110,8 +110,8 @@ public final class Rewards {
                 total += paid;
             }
         }
-        if (count == 1) message("Your legacy grows: +" + total + " career points");
-        else if (count > 1) message("Your legacy grows by " + count + " deeds: +" + total + " career points");
+        if (count == 1) message("Achievement: +" + total + " career points");
+        else if (count > 1) message("" + count + " achievements: +" + total + " career points");
     }
 
     private static void message(String text) {

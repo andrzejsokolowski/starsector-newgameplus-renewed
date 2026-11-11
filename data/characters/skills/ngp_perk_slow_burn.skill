@@ -1,0 +1,14 @@
+{
+	"id":"ngp_perk_slow_burn",
+	"governingAptitude":"ngp_perks",
+	"compressHullmods":false,
+	"effectGroups":[
+		{
+			"requiredSkillLevel":1,
+			"effectBasedOnLevel":false,
+			"effects":[
+				{"type":"FLEET", "script":"ngprenewed.perks.Perks$SlowBurn"},
+			]
+		},
+	],
+}

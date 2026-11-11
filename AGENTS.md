@@ -36,7 +36,11 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   (`LedgerSpawner`) once no dialog is open.
 - `data/campaign/ngp_store_items.csv` - every store item. Kinds: story_points, skill_points, levels,
   credits, commodity, special_item, perk (a hidden player skill). `stock` -1 = no limit per game.
-  The Armoury tab (kind weapon_pack, one per faction) is built in code from the loaded factions, not the CSV.
+  The Armory tab (kind weapon_pack, one per faction) is built in code from the loaded factions, not the CSV.
+  Every colony item (an id in `ItemEffectsRepo.ITEM_EFFECTS` or tag `colony_item`: vanilla, AoTD Tenebrian,
+  UAF Auroran...) is added to Rare by `StoreCatalog.addColonyItems` on every game load, 1 per game, price
+  10 + base value / 25000, 10 to 60. Item descriptions say plainly what the item does: no flavor lines
+  (Andrzej, 2026-11-11: "PLEASE REMOVE EVERY FLUFF TEXT"). American spelling.
   Kind peerless_point goes through `compat/PeerlessBridge` (Peerless Skills API, compileOnly). Cargo goes to the delivery bay and
   reaches the player through a loot screen (never straight into cargo).
 - `feats/Feats` - `data/campaign/ngp_feats.csv` (id, name, points, requiresMod, memory sector|player,
@@ -67,7 +71,12 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   are variant tags read by the permanent hull mod `ngp_ledger_refit`; extra OP is the permanent hull
   mod `ngp_ledger_rails` with negative OP cost. `SaveState` records each ship's work by member id and
   `ShipItems.sync` puts it back if a refit drops it.
-- `perks/StoragePerk` - the +10% capacity perk, a hidden `npc_only` skill on the player.
+- `perks/` - perks (Perks tab), hidden `npc_only` skills on the player under the aptitude `ngp_perks`
+  (aptitude_data.csv, skill `aptitude_ngp_perks`). `StoragePerk` plus the classes in `Perks`. With
+  Second-in-Command enabled, `Perks.showInSecondInCommand` removes `npc_only` at load so SiC lists them on
+  its Non-Executive Skills page (it skips npc_only skills and aptitudes); without it they stay hidden so
+  the vanilla screen never sells them for skill points. Last Stand cancels the first lethal hull hit per
+  ship per battle (HullDamageAboutToBeTakenListener) and repairs 10% of max hull.
 - `rules.csv` hands the Ledger's dialog to `LedgerDialog` via `NGP_OpenLedger`.
 - Players see the station as **Legacy Station** (0.7.4, Andrzej disliked "the Ledger"); classes and ids
   keep the old `ledger` names so saves load. Its entity type needs the tag `has_interaction_dialog`, or the

@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 /**
- * The Ledger Holds perk: +10% cargo, fuel and crew capacity on every ship in the fleet. It is a hidden
+ * The Deep Holds perk: +10% cargo, fuel and crew capacity on every ship in the fleet. It is a hidden
  * skill on the player (data/characters/skills/ngp_storage_perk.skill), so it lasts for the game it
  * was bought in and the game applies it to every ship the same way it applies Bulk Transport.
  */
