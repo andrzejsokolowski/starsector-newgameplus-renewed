@@ -1,3 +1,8 @@
+Version 0.8.2 (2026-11-12)
+- Every achievement now shows the career points it pays, done or not (needs Achievements - Renewed 0.5.0).
+- Points for the new Achievements - Renewed 0.5.0 achievements: Visit 25%, 50% and 100% of the star systems (5, 10 and 20) and Defeat a Threat fleet (20).
+- Defeat an Omega fleet is now the Achievements - Renewed achievement and still pays 30. A profile already paid for it is not paid again.
+
 Version 0.8.1 (2026-11-11)
 - Set career points for the 127 quest achievements of Achievements - Renewed 0.4.0: 2 to 30 points each by the size of the quest, instead of the default 5.
 

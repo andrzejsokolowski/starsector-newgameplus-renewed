@@ -76,11 +76,23 @@ public final class Rewards {
         return feat == null ? null : feat.id;
     }
 
+    /**
+     * Paid for this achievement, or for its feat under the feat's own achievement id. The second case is a
+     * feat that later shares another mod's achievement (0.8.2: the Omega feat moved to acr_win_omega), so it
+     * never pays twice.
+     */
+    static boolean alreadyPaid(AchievementSpec spec) {
+        if (Career.achievementPaid(spec.id, legacyFeatId(spec))) return true;
+        Feat feat = Feats.forAchievement(spec.id);
+        return feat != null && !feat.ownAchievementId().equals(spec.id)
+                && Career.achievementPaid(feat.ownAchievementId(), null);
+    }
+
     /** Pays one achievement if it pays anything and the profile has not been paid for it. */
     static int pay(SaveState state, AchievementSpec spec) {
         if (state == null || spec == null) return 0;
         int points = points(spec);
-        if (points <= 0 || Career.achievementPaid(spec.id, legacyFeatId(spec))) return 0;
+        if (points <= 0 || alreadyPaid(spec)) return 0;
         int paid = Career.payAchievement(state.saveId(), spec.id, points);
         log.info("New Game Plus - Renewed: achievement " + spec.id + " paid " + paid + " career points.");
         return paid;

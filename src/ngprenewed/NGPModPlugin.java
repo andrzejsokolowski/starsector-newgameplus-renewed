@@ -21,6 +21,12 @@ public class NGPModPlugin extends BaseModPlugin {
         Feats.load();
         ngprenewed.perks.Perks.showInSecondInCommand();
         Rewards.load();
+        try {
+            // Achievements - Renewed 0.5.0 and later: "+N career points" under every achievement.
+            Achievements.addRewardText(new ngprenewed.feats.PointsLine());
+        } catch (NoSuchMethodError | NoClassDefFoundError old) {
+            Global.getLogger(NGPModPlugin.class).info("New Game Plus - Renewed: Achievements - Renewed is older than 0.5.0; no points line.");
+        }
     }
 
     @Override

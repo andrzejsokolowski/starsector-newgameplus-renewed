@@ -4,7 +4,7 @@ id,name,points,requiresMod,memory,flag,check,value,shared,hint,howTo
 # Each feat is an achievement in Achievements - Renewed (id ngp_<feat id>). shared: an achievement of another mod with the same condition; when it exists the feat pays on it and adds none of its own. hint and howTo are the achievement texts.,,,,,,,,,,
 at_the_gates,Finish At the Gates,20,,sector,$gaATG_missionCompleted,,,rbr_atg,Make the Gates work again,Finish the mission At the Gates from the Galatia Academy.
 planetkiller,Recover the planetkiller,20,,sector,$pk_recovered,,,rbr_planetkiller,Find a weapon that should have stayed lost,Salvage the planetkiller at the end of the mission The Scythe of Orion.
-omega,Defeat an Omega fleet,30,,sector,$ngp_defeatedOmega,,,,Win against something from beyond,Win a battle with an Omega fleet on the enemy side.
+omega,Defeat an Omega fleet,30,,sector,$ngp_defeatedOmega,,,acr_win_omega,Win against something from beyond,Win a battle with an Omega fleet on the enemy side.
 ziggurat,Defeat the Ziggurat,20,,sector,$defeatedZiggurat,,,rbr_ziggurat,Something still guards Alpha Site,Defeat the Ziggurat in battle at Alpha Site.
 academy,Finish The Kallichore Archive,10,,sector,$gaKA_missionCompleted,,,rbr_academy,The Academy wants its old records back,Finish the mission The Kallichore Archive from the Galatia Academy.
 usurpers,Finish The Usurpers,10,,sector,$sdtu_missionCompleted,,,rbr_usurpers,Get involved in Sindrian politics,Finish the mission The Usurpers.

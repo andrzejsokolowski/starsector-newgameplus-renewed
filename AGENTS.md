@@ -58,6 +58,10 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   `data/campaign/ngp_achievement_points.csv`, else 5. `FeatPayer` (listener) pays at once,
   `Rewards.check` in CampaignScript pays anything done but unpaid. Paid ids sit in career.json
   `achievements`; the old `feats` map still counts.
+  `PointsLine` (0.8.2) is the Achievements - Renewed 0.5.0 `RewardText`: "+N career points" under every
+  achievement, the same text as a feat's own reward so it shows once. The Omega feat shares `acr_win_omega`
+  since 0.8.2; `Rewards.alreadyPaid` also counts a feat paid under its own `ngp_` id, so a feat that starts
+  sharing never pays twice.
 - Rule Book - Renewed's achievement `rbr_ngp_ledger` ("Use a consumable item") reads sector memory
   `$ngp_usedConsumable` (set by `ShipItems.apply`, 0.7.2) and, for older versions, the hull mod id
   `ngp_ledger_refit`. Never rename either.
