@@ -34,7 +34,6 @@ rbr_station,10
 rbr_remnant,10
 rbr_abyss,20
 # Rule Book - Renewed: other mods,
-rbr_sol_shroud,15
 rbr_sol_reach,5
 rbr_gd_pulls,5
 rbr_gd_wins,5
@@ -42,8 +41,6 @@ rbr_cloning,15
 rbr_cloning_supergrowth,25
 rbr_arsenal_weapons,10
 rbr_arsenal_ship,15
-rbr_starterpack,5
-rbr_contract,5
 rbr_aar_ascended,20
 rbr_aar_ecumenopolis,30
 rbr_oce_tutelage,15

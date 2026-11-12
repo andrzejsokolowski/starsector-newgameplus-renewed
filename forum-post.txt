@@ -61,6 +61,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.8.3[/b]
+[list][li]The New Game Plus achievements for other mods' quests have new names and hints, the same as in Achievements - Renewed 0.5.1.[/li][li]The career points for three achievements that Achievements - Renewed 0.5.1 removed are gone too.[/li][/list]
 [b]0.8.2[/b]
 [list][li]Every achievement now shows the career points it pays, done or not (needs Achievements - Renewed 0.5.0).[/li][li]Points for the new Achievements - Renewed 0.5.0 achievements: Visit 25 percent, 50 percent and 100 percent of the star systems (5, 10 and 20) and Defeat a Threat fleet (20).[/li][li]Defeat an Omega fleet is now the Achievements - Renewed achievement and still pays 30. A profile already paid for it is not paid again.[/li][/list]
 [b]0.8.1[/b]

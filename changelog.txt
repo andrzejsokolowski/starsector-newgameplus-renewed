@@ -1,3 +1,7 @@
+Version 0.8.3 (2026-11-12)
+- The New Game Plus achievements for other mods' quests have new names and hints, the same as in Achievements - Renewed 0.5.1.
+- The career points for three achievements that Achievements - Renewed 0.5.1 removed are gone too.
+
 Version 0.8.2 (2026-11-12)
 - Every achievement now shows the career points it pays, done or not (needs Achievements - Renewed 0.5.0).
 - Points for the new Achievements - Renewed 0.5.0 achievements: Visit 25%, 50% and 100% of the star systems (5, 10 and 20) and Defeat a Threat fleet (20).
