@@ -1,3 +1,6 @@
+Version 0.9.1 (2026-11-12)
+- Set career points for the 9 Navarchy of Tania achievements of Achievements - Renewed 0.6.0: 2 to 20 points each by the size of the quest, instead of the default 5.
+
 Version 0.9.0 (2026-11-12)
 - New Fighter Perks tab: Fast Refit (fighters replaced 25% faster), Fighter Speed (+15% top speed and acceleration), Fighter Armor (+50%), Fighter Hull (+25%), Fighter Damage (+10% weapon damage) and Fighter Range (+20% engagement range).
 - Extra Armor now gives +50 / 100 / 200 / 300 armor on frigates, destroyers, cruisers and capital ships instead of +50 on every ship.
