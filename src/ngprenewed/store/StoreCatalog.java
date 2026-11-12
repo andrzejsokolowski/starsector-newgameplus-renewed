@@ -116,6 +116,7 @@ public final class StoreCatalog {
         for (SpecialItemSpecAPI spec : Global.getSettings().getAllSpecialItemSpecs()) {
             if (spec == null || sold.contains(spec.getId())) continue;
             if (!effects.contains(spec.getId()) && !spec.hasTag("colony_item")) continue;
+            if (scripted(spec)) continue;
             String icon = spec.getIconName();
             try {
                 Global.getSettings().loadTexture(icon);
@@ -137,6 +138,19 @@ public final class StoreCatalog {
         return Math.max(10, Math.min(60, cost));
     }
 
+    /**
+     * Items the game hands out through a script, one per campaign: buying one breaks that script (Andrzej,
+     * 2026-11-12: a Wormhole Anchor "will crash the game"). Mission items such as the Planetkiller too.
+     */
+    private static final Set<String> SCRIPTED = new HashSet<>(java.util.Arrays.asList("wormhole_anchor"));
+
+    static boolean scripted(SpecialItemSpecAPI spec) {
+        return SCRIPTED.contains(spec.getId()) || spec.hasTag("mission_item");
+    }
+
+    /** Industries named in a colony item's line; more than this become "and N more". */
+    private static final int NAMES_SHOWN = 3;
+
     /** "Colony item: Heavy Industry, Orbital Works." from the item's industry list, when it has one. */
     private static String installsIn(SpecialItemSpecAPI spec) {
         String params = spec.getParams();
@@ -152,7 +166,11 @@ public final class StoreCatalog {
                 // not an industry id
             }
         }
-        return names.isEmpty() ? "Colony item." : "Colony item: " + String.join(", ", names) + ".";
+        if (names.isEmpty()) return "Colony item.";
+        if (names.size() <= NAMES_SHOWN) return "Colony item: " + String.join(", ", names) + ".";
+        // 0.9.0: some mods list hundreds of buildings for one item, and the whole list ran over the store.
+        return "Colony item: " + String.join(", ", names.subList(0, NAMES_SHOWN)) + " and "
+                + (names.size() - NAMES_SHOWN) + " more.";
     }
 
     /** org.json returns the string "null" for a JSON null, so empty cells are checked by hand. */

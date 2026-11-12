@@ -1,3 +1,9 @@
+Version 0.9.0 (2026-11-12)
+- New Fighter Perks tab: Fast Refit (fighters replaced 25% faster), Fighter Speed (+15% top speed and acceleration), Fighter Armor (+50%), Fighter Hull (+25%), Fighter Damage (+10% weapon damage) and Fighter Range (+20% engagement range).
+- Extra Armor now gives +50 / 100 / 200 / 300 armor on frigates, destroyers, cruisers and capital ships instead of +50 on every ship.
+- The Wormhole Anchor and mission items such as the Planetkiller are no longer sold: they are handed out by scripts, and buying one could crash the game.
+- A colony item's line names at most three buildings, then how many more. A long list no longer runs over the rows below it, and every store row grows to fit its text.
+
 Version 0.8.4 (2026-11-12)
 - Every word of the New Game Plus achievement names now starts with a capital letter, as in Achievements - Renewed 0.5.2.
 

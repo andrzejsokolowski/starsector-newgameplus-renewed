@@ -63,14 +63,15 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
 
     private static final class Row {
         final StoreItem item;
-        final float y;
+        final float y, h;
         LabelAPI price, stock, button;
         String blocker;
         boolean hover;
 
-        Row(StoreItem item, float y) {
+        Row(StoreItem item, float y, float h) {
             this.item = item;
             this.y = y;
+            this.h = h;
         }
     }
 
@@ -192,10 +193,20 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
     }
 
     private void build(Tab t) {
+        float textX = ROW_X + ICON + TEXT_GAP;
+        float priceX = buyX() - TEXT_GAP - PRICE_W;
+        float textW = priceX - TEXT_GAP - textX;
+        // A row grows to fit its description (0.9.0: a long one ran over the rows below it). Measured on
+        // labels in a panel that is never shown, before the content panel is made.
+        CustomPanelAPI measure = panel.createCustomPanel(textW, 100f, null);
         float y = ROW_GAP;
         for (StoreItem item : StoreCatalog.itemsIn(t.name)) {
-            t.rows.add(new Row(item, y));
-            y += ROW_H + ROW_GAP;
+            float h = ROW_H;
+            if (!item.description.isEmpty()) {
+                h = Math.max(ROW_H, 42f + textHeight(measure, item.description, textW) + 14f);
+            }
+            t.rows.add(new Row(item, y, h));
+            y += h + ROW_GAP;
         }
         float contentH = Math.max(listH, y + ROW_GAP);
 
@@ -206,21 +217,19 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
 
         TooltipMakerAPI scroller = t.container.createUIElement(listW, listH, true);
         t.content = t.container.createCustomPanel(listW, contentH, null);
-        float textX = ROW_X + ICON + TEXT_GAP;
-        float priceX = buyX() - TEXT_GAP - PRICE_W;
-        float textW = priceX - TEXT_GAP - textX;
         for (Row r : t.rows) {
             label(t.content, r.item.name, GOLD, textX, r.y + 14f, textW, 24f, Fonts.INSIGNIA_LARGE, Alignment.LMID);
             if (!r.item.description.isEmpty()) {
                 wrapped(t.content, r.item.description, DIM, Fonts.DEFAULT_SMALL, textX, r.y + 42f, textW);
             }
             boolean limited = r.item.limited();
-            r.price = label(t.content, "", GOLD, priceX, r.y + (limited ? 22f : 33f), PRICE_W, 18f,
+            float mid = r.y + (r.h - ROW_H) / 2f;
+            r.price = label(t.content, "", GOLD, priceX, mid + (limited ? 22f : 33f), PRICE_W, 18f,
                     Fonts.DEFAULT_SMALL, Alignment.RMID);
             if (limited) {
-                r.stock = label(t.content, "", DIM, priceX, r.y + 44f, PRICE_W, 18f, Fonts.DEFAULT_SMALL, Alignment.RMID);
+                r.stock = label(t.content, "", DIM, priceX, mid + 44f, PRICE_W, 18f, Fonts.DEFAULT_SMALL, Alignment.RMID);
             }
-            r.button = label(t.content, "", Color.WHITE, buyX(), r.y + (ROW_H - 18f) / 2f, BUY_W, 18f,
+            r.button = label(t.content, "", Color.WHITE, buyX(), r.y + (r.h - 18f) / 2f, BUY_W, 18f,
                     Fonts.DEFAULT_SMALL, Alignment.MID);
         }
         if (t.rows.isEmpty()) {
@@ -238,6 +247,13 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
         label.setAlignment(align);
         parent.addComponent((UIComponentAPI) label).inTL(x, y).setSize(w, h);
         return label;
+    }
+
+    private float textHeight(CustomPanelAPI measure, String text, float w) {
+        LabelAPI label = Global.getSettings().createLabel(text, Fonts.DEFAULT_SMALL);
+        measure.addComponent((UIComponentAPI) label);
+        label.autoSizeToWidth(w);
+        return label.getPosition().getHeight();
     }
 
     private void wrapped(CustomPanelAPI parent, String text, Color color, String font, float x, float y, float w) {
@@ -345,7 +361,7 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
         if (shown != null) {
             for (Row r : shown.rows) {
                 r.hover = inList && inBox(mx, my, shown.contentLeft + buyX(),
-                        shown.contentTop + r.y + (ROW_H - BUY_H) / 2f, BUY_W, BUY_H);
+                        shown.contentTop + r.y + (r.h - BUY_H) / 2f, BUY_W, BUY_H);
             }
         }
         if (!clicked) return;
@@ -502,18 +518,18 @@ public final class StorePanel extends BaseCustomUIPanelPlugin {
         float left = t.contentLeft, w = contentW();
         for (Row r : t.rows) {
             float top = t.contentTop + r.y;
-            if (top + ROW_H < listTop || top > listTop + listH) continue;
-            rect(left, top, w, ROW_H, ROW_FILL, alpha);
-            rect(left, top, 3f, ROW_H, r.blocker == null ? GOLD : FAINT, alpha * 0.7f);
+            if (top + r.h < listTop || top > listTop + listH) continue;
+            rect(left, top, w, r.h, ROW_FILL, alpha);
+            rect(left, top, 3f, r.h, r.blocker == null ? GOLD : FAINT, alpha * 0.7f);
 
-            float iconX = left + ROW_X, iconY = top + (ROW_H - ICON) / 2f;
+            float iconX = left + ROW_X, iconY = top + (r.h - ICON) / 2f;
             rect(iconX, iconY, ICON, ICON, BG, alpha * 0.7f);
             drawIcon(r.item.icon, iconX + 4f, iconY + 4f, ICON - 8f, alpha);
             frame(iconX, iconY, ICON, ICON, GOLD, 1f, alpha * 0.5f);
 
             boolean confirming = r.item.id.equals(pendingItem);
             Color fill = r.blocker != null ? BUTTON_OFF : confirming ? CONFIRM : r.hover ? BUTTON_HOVER : BUTTON;
-            button(left + buyX(), top + (ROW_H - BUY_H) / 2f, BUY_W, BUY_H, fill,
+            button(left + buyX(), top + (r.h - BUY_H) / 2f, BUY_W, BUY_H, fill,
                     confirming ? GREEN : r.blocker != null ? FAINT : DIM, alpha);
         }
         GL11.glDisable(GL11.GL_SCISSOR_TEST);

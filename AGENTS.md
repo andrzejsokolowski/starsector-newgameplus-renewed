@@ -39,7 +39,9 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   The Armory tab (kind weapon_pack, one per faction) is built in code from the loaded factions, not the CSV.
   Every colony item (an id in `ItemEffectsRepo.ITEM_EFFECTS` or tag `colony_item`: vanilla, AoTD Tenebrian,
   UAF Auroran...) is added to Rare by `StoreCatalog.addColonyItems` on every game load, 1 per game, price
-  10 + base value / 25000, 10 to 60. Item descriptions say plainly what the item does: no flavor lines
+  10 + base value / 25000, 10 to 60. Never scripted items: `StoreCatalog.scripted` skips the Wormhole Anchor
+  and every `mission_item` (0.9.0, Andrzej: buying an anchor "will crash the game"). The line names at most
+  three buildings, then "and N more" (some mods list hundreds). Item descriptions say plainly what the item does: no flavor lines
   (Andrzej, 2026-11-11: "PLEASE REMOVE EVERY FLUFF TEXT"). American spelling.
   Kind peerless_point goes through `compat/PeerlessBridge` (Peerless Skills API, compileOnly). Cargo goes to the delivery bay and
   reaches the player through a loot screen (never straight into cargo).
@@ -73,6 +75,7 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   scrolling) holding a content panel of labels; hidden tabs are moved off screen. Tabs, rows, icons and
   buttons are drawn in renderBelow and hit-tested in advance() from `Mouse` state, reading the content
   panel's real position each frame. No ButtonAPI: in 0.7.4 the tab buttons drew but never got clicks.
+  Each row is as tall as its description needs (measured in a panel never shown), at least 84.
   `delegate()` is a separate object so advance runs once a frame.
 - `ships/` - the Shipyard items (special items with a right-click dialog). S-mod slots and stat boosts
   are variant tags read by the permanent hull mod `ngp_ledger_refit`; extra OP is the permanent hull
@@ -83,7 +86,10 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   Second-in-Command enabled, `Perks.showInSecondInCommand` removes `npc_only` at load so SiC lists them on
   its Non-Executive Skills page (it skips npc_only skills and aptitudes); without it they stay hidden so
   the vanilla screen never sells them for skill points. Last Stand cancels the first lethal hull hit per
-  ship per battle (HullDamageAboutToBeTakenListener) and repairs 10% of max hull.
+  ship per battle (HullDamageAboutToBeTakenListener) and repairs 10% of max hull. Extra Armor is +50/100/200/300
+  by hull size. The Fighter Perks tab (0.9.0) holds `ngp_perk_fighter_*`: effect type ALL_FIGHTERS_IN_FLEET
+  changes the fighters, ALL_SHIPS_IN_FLEET the carriers (refit time, engagement range). Skill file `scope`
+  only uses values vanilla files use.
 - `rules.csv` hands the Ledger's dialog to `LedgerDialog` via `NGP_OpenLedger`.
 - Players see the station as **Legacy Station** (0.7.4, Andrzej disliked "the Ledger"); classes and ids
   keep the old `ledger` names so saves load. Its entity type needs the tag `has_interaction_dialog`, or the

@@ -1,0 +1,15 @@
+{
+	"id":"ngp_perk_fighter_armor",
+	"governingAptitude":"ngp_perks",
+	"compressHullmods":false,
+	"scope":"ALL_FIGHTERS",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":1,
+			"effectBasedOnLevel":false,
+			"effects":[
+				{"type":"ALL_FIGHTERS_IN_FLEET", "script":"ngprenewed.perks.Perks$FighterArmor"},
+			]
+		},
+	],
+}

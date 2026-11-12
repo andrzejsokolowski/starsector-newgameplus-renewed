@@ -93,10 +93,23 @@ public final class Perks {
         }
     }
 
+    /** 0.9.0 (Andrzej): +50 / 100 / 200 / 300 armor by hull size instead of +50 on every ship. */
     public static class Armor extends ShipPerk {
+        static float armorFor(HullSize hullSize) {
+            if (hullSize == null) return 0f;
+            switch (hullSize) {
+                case FRIGATE: return 50f;
+                case DESTROYER: return 100f;
+                case CRUISER: return 200f;
+                case CAPITAL_SHIP: return 300f;
+                default: return 0f;
+            }
+        }
+
         @Override
         public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
-            stats.getArmorBonus().modifyFlat(id, 50f);
+            float armor = armorFor(hullSize);
+            if (armor > 0f) stats.getArmorBonus().modifyFlat(id, armor);
         }
 
         @Override
@@ -106,7 +119,7 @@ public final class Perks {
 
         @Override
         public String getEffectDescription(float level) {
-            return "+50 armor";
+            return "+50 / 100 / 200 / 300 armor on frigates, destroyers, cruisers and capital ships";
         }
     }
 
@@ -245,6 +258,137 @@ public final class Perks {
         @Override
         public String getEffectDescription(float level) {
             return "+10% sensor range";
+        }
+    }
+
+    /**
+     * Fighter perks (0.9.0, Andrzej: "a separate perk list for fighters"), their own tab in the store. Fast
+     * Refit and Fighter Range change the carriers; the others change the fighters themselves.
+     */
+    private abstract static class FighterPerk extends ShipPerk {
+        @Override
+        public ScopeDescription getScopeDescription() {
+            return ScopeDescription.ALL_FIGHTERS;
+        }
+    }
+
+    public static class FastRefit extends ShipPerk {
+        @Override
+        public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
+            stats.getFighterRefitTimeMult().modifyMult(id, 1f / 1.25f);
+        }
+
+        @Override
+        public void unapply(MutableShipStatsAPI stats, HullSize hullSize, String id) {
+            stats.getFighterRefitTimeMult().unmodify(id);
+        }
+
+        @Override
+        public String getEffectDescription(float level) {
+            return "25% faster fighter replacements";
+        }
+
+        @Override
+        public ScopeDescription getScopeDescription() {
+            return ScopeDescription.ALL_CARRIERS;
+        }
+    }
+
+    public static class FighterRange extends ShipPerk {
+        @Override
+        public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
+            stats.getFighterWingRange().modifyPercent(id, 20f);
+        }
+
+        @Override
+        public void unapply(MutableShipStatsAPI stats, HullSize hullSize, String id) {
+            stats.getFighterWingRange().unmodifyPercent(id);
+        }
+
+        @Override
+        public String getEffectDescription(float level) {
+            return "+20% fighter engagement range";
+        }
+
+        @Override
+        public ScopeDescription getScopeDescription() {
+            return ScopeDescription.ALL_CARRIERS;
+        }
+    }
+
+    public static class FighterSpeed extends FighterPerk {
+        @Override
+        public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
+            stats.getMaxSpeed().modifyPercent(id, 15f);
+            stats.getAcceleration().modifyPercent(id, 15f);
+            stats.getDeceleration().modifyPercent(id, 15f);
+        }
+
+        @Override
+        public void unapply(MutableShipStatsAPI stats, HullSize hullSize, String id) {
+            stats.getMaxSpeed().unmodifyPercent(id);
+            stats.getAcceleration().unmodifyPercent(id);
+            stats.getDeceleration().unmodifyPercent(id);
+        }
+
+        @Override
+        public String getEffectDescription(float level) {
+            return "+15% fighter top speed and acceleration";
+        }
+    }
+
+    public static class FighterArmor extends FighterPerk {
+        @Override
+        public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
+            stats.getArmorBonus().modifyPercent(id, 50f);
+        }
+
+        @Override
+        public void unapply(MutableShipStatsAPI stats, HullSize hullSize, String id) {
+            stats.getArmorBonus().unmodifyPercent(id);
+        }
+
+        @Override
+        public String getEffectDescription(float level) {
+            return "+50% fighter armor";
+        }
+    }
+
+    public static class FighterHull extends FighterPerk {
+        @Override
+        public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
+            stats.getHullBonus().modifyPercent(id, 25f);
+        }
+
+        @Override
+        public void unapply(MutableShipStatsAPI stats, HullSize hullSize, String id) {
+            stats.getHullBonus().unmodifyPercent(id);
+        }
+
+        @Override
+        public String getEffectDescription(float level) {
+            return "+25% fighter hull";
+        }
+    }
+
+    public static class FighterDamage extends FighterPerk {
+        @Override
+        public void apply(MutableShipStatsAPI stats, HullSize hullSize, String id, float level) {
+            stats.getBallisticWeaponDamageMult().modifyPercent(id, 10f);
+            stats.getEnergyWeaponDamageMult().modifyPercent(id, 10f);
+            stats.getMissileWeaponDamageMult().modifyPercent(id, 10f);
+        }
+
+        @Override
+        public void unapply(MutableShipStatsAPI stats, HullSize hullSize, String id) {
+            stats.getBallisticWeaponDamageMult().unmodifyPercent(id);
+            stats.getEnergyWeaponDamageMult().unmodifyPercent(id);
+            stats.getMissileWeaponDamageMult().unmodifyPercent(id);
+        }
+
+        @Override
+        public String getEffectDescription(float level) {
+            return "+10% fighter weapon damage";
         }
     }
 
