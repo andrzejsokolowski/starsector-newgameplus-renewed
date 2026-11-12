@@ -53,7 +53,8 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   exists the feat registers none of its own. Feats sit in their mod's tab (`tab` = mod name) or the
   `vanilla` tab, never an NGP tab.
   Feat names and hints are Andrzej's own (0.8.3, from his Achievements - Renewed 0.5.1 review), many
-  of them jokes on purpose: copy his words exactly, fix only typos, and ask him before changing a name.
+  of them jokes on purpose: copy his words exactly, fix only typos, and ask him before changing a name. Every word of a name
+  starts with a capital letter (0.8.4, ACR 0.5.2).
 - `feats/Rewards` (0.7.0, Andrzej: "Aren't achievements feats?") - EVERY achievement in
   Achievements - Renewed pays once per profile, except Rule Book challenges (`rbr_challenge_*`, or
   category Challenges of `rulebook_renewed`), which pay nothing. Points: the feat's points, else

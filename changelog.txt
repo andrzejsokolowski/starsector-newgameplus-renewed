@@ -1,3 +1,6 @@
+Version 0.8.4 (2026-11-12)
+- Every word of the New Game Plus achievement names now starts with a capital letter, as in Achievements - Renewed 0.5.2.
+
 Version 0.8.3 (2026-11-12)
 - The New Game Plus achievements for other mods' quests have new names and hints, the same as in Achievements - Renewed 0.5.1.
 - The career points for three achievements that Achievements - Renewed 0.5.1 removed are gone too.
