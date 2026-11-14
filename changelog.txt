@@ -1,3 +1,6 @@
+Version 0.9.3 (2026-11-14)
+- Fixed a crash when hovering a perk on Second-in-Command's Non-Executive Skills page (added in 0.9.2).
+
 Version 0.9.2 (2026-11-14)
 - With Second-in-Command, the fighter perks have their own Fighter Perks row, so the perks no longer run past the edge of the Non-Executive Skills page.
 - Perk tooltips no longer show a "- Legacy Station" quote line or repeat the perk's effect above it.

@@ -46,13 +46,18 @@ public final class Perks {
      * hidden, so the vanilla screen never offers them for skill points.
      */
     public static void showInSecondInCommand() {
-        if (!Global.getSettings().getModManager().isModEnabled(SECOND_IN_COMMAND)) return;
+        boolean secondInCommand = Global.getSettings().getModManager().isModEnabled(SECOND_IN_COMMAND);
         int shown = 0;
         for (String id : Global.getSettings().getSkillIds()) {
             SkillSpecAPI spec = Global.getSettings().getSkillSpec(id);
             if (spec == null) continue;
             String aptitude = spec.getGoverningAptitudeId();
             if (!APTITUDE.equals(aptitude) && !FIGHTER_APTITUDE.equals(aptitude)) continue;
+            // An empty description or author cell loads as null, and Second-in-Command's tooltip calls
+            // getAuthor().isBlank(): 0.9.2 crashed on hovering a perk. Empty text shows no quote line.
+            if (spec.getDescription() == null) spec.setDescription("");
+            if (spec.getAuthor() == null) spec.setAuthor("");
+            if (!secondInCommand) continue;
             if (spec.getTags() != null) spec.getTags().remove(HIDDEN_TAG);
             if (!spec.hasTag(HIDDEN_TAG)) shown++;
         }

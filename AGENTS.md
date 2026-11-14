@@ -96,6 +96,8 @@ build when a .skill file names a class of this mod that was not compiled (the ga
   Second-in-Command draws one row per aptitude and never wraps it; about 11 skills fit, and 15 in one row
   ran past its panel. Perks have no description or author in skill_data.csv: SiC shows those as the
   quote and its attribution ("- Legacy Station"), above the effect line that already says it all.
+  An empty cell loads as null and SiC's tooltip calls getAuthor().isBlank() (0.9.2 crashed on hover), so
+  `Perks.showInSecondInCommand` sets both to "" at load. Never leave a skill's author null.
 - `rules.csv` hands the Ledger's dialog to `LedgerDialog` via `NGP_OpenLedger`.
 - Players see the station as **Legacy Station** (0.7.4, Andrzej disliked "the Ledger"); classes and ids
   keep the old `ledger` names so saves load. Its entity type needs the tag `has_interaction_dialog`, or the
