@@ -1,6 +1,6 @@
 {
 	"id":"ngp_perk_fighter_speed",
-	"governingAptitude":"ngp_perks",
+	"governingAptitude":"ngp_fighter_perks",
 	"compressHullmods":false,
 	"scope":"ALL_FIGHTERS",
 	"effectGroups":[

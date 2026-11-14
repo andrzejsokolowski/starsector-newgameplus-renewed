@@ -28,6 +28,11 @@ public final class Perks {
 
     public static final String APTITUDE = "ngp_perks";
     public static final String APTITUDE_SKILL = "aptitude_ngp_perks";
+    /**
+     * Fighter perks have their own aptitude (0.9.2): Second-in-Command draws one row per aptitude and never
+     * wraps it, and all fifteen perks in one row ran past the right edge of its panel.
+     */
+    public static final String FIGHTER_APTITUDE = "ngp_fighter_perks";
     private static final String SECOND_IN_COMMAND = "second_in_command";
     private static final String HIDDEN_TAG = "npc_only";
     private static final Logger log = Global.getLogger(Perks.class);
@@ -45,7 +50,9 @@ public final class Perks {
         int shown = 0;
         for (String id : Global.getSettings().getSkillIds()) {
             SkillSpecAPI spec = Global.getSettings().getSkillSpec(id);
-            if (spec == null || !APTITUDE.equals(spec.getGoverningAptitudeId())) continue;
+            if (spec == null) continue;
+            String aptitude = spec.getGoverningAptitudeId();
+            if (!APTITUDE.equals(aptitude) && !FIGHTER_APTITUDE.equals(aptitude)) continue;
             if (spec.getTags() != null) spec.getTags().remove(HIDDEN_TAG);
             if (!spec.hasTag(HIDDEN_TAG)) shown++;
         }
@@ -412,6 +419,14 @@ public final class Perks {
         @Override
         public Color getTextColor() {
             return Misc.getTextColor();
+        }
+    }
+
+    /** The text of the fighter perks' aptitude (0.9.2). */
+    public static class FighterAptitude extends Aptitude {
+        @Override
+        public String getString() {
+            return "Fighter perks bought at Legacy Station with career points. They last for this game.";
         }
     }
 }

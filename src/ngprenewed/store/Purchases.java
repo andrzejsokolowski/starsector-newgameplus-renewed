@@ -9,6 +9,7 @@ import ngprenewed.Career;
 import ngprenewed.LevelTracker;
 import ngprenewed.SaveState;
 import ngprenewed.compat.PeerlessBridge;
+import ngprenewed.compat.PeerlessRenewedBridge;
 import org.apache.log4j.Logger;
 
 /** Checks and carries out one purchase. */
@@ -92,6 +93,11 @@ public final class Purchases {
                 grantPerk(item.target);
                 break;
             case "peerless_point":
+                // Peerless Skills - Renewed (0.9.2) when it is on, else the original Peerless Skills.
+                if (Global.getSettings().getModManager().isModEnabled(PeerlessRenewedBridge.MOD_ID)) {
+                    PeerlessRenewedBridge.addPoint();
+                    break;
+                }
                 // A new key per purchase, so each one pays; Peerless Skills refuses a key it has seen.
                 String key = "$ngp_renewed_" + state.saveId() + "_" + item.id + "_" + (state.boughtCount(item.id) + 1);
                 if (!PeerlessBridge.awardPoint(key)) throw new IllegalStateException("Peerless Skills refused " + key);

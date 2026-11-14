@@ -22,7 +22,8 @@ CC0 licence line of the forum post for anything taken. Nothing of it is used so 
 ## Build
 
 `./gradlew releaseZip` compiles against the game and LunaLib (`gradle.properties` names the game
-folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
+folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder. `checkSkillScripts` fails the
+build when a .skill file names a class of this mod that was not compiled (the game stops at start).
 
 ## Layout
 
@@ -43,7 +44,9 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   and every `mission_item` (0.9.0, Andrzej: buying an anchor "will crash the game"). The line names at most
   three buildings, then "and N more" (some mods list hundreds). Item descriptions say plainly what the item does: no flavor lines
   (Andrzej, 2026-11-11: "PLEASE REMOVE EVERY FLUFF TEXT"). American spelling.
-  Kind peerless_point goes through `compat/PeerlessBridge` (Peerless Skills API, compileOnly). Cargo goes to the delivery bay and
+  Kind peerless_point goes through `compat/PeerlessRenewedBridge` when Peerless Skills - Renewed is on
+  (`PeerlessData.addPoints`), else `compat/PeerlessBridge` (the original Peerless Skills; its jar is gone, so
+  `stubs/` holds a compile-only copy of its API, never packaged). requiresMod `a|b` = either mod. Cargo goes to the delivery bay and
   reaches the player through a loot screen (never straight into cargo).
 - `feats/Feats` - `data/campaign/ngp_feats.csv` (id, name, points, requiresMod, memory sector|player,
   flag, check flag|equals|skill, value). Flag may join keys with & (all) or | (any). getBoolean also
@@ -89,7 +92,10 @@ folder), runs the checks and writes `NewGamePlusRenewed.zip` in this folder.
   ship per battle (HullDamageAboutToBeTakenListener) and repairs 10% of max hull. Extra Armor is +50/100/200/300
   by hull size. The Fighter Perks tab (0.9.0) holds `ngp_perk_fighter_*`: effect type ALL_FIGHTERS_IN_FLEET
   changes the fighters, ALL_SHIPS_IN_FLEET the carriers (refit time, engagement range). Skill file `scope`
-  only uses values vanilla files use.
+  only uses values vanilla files use. They are under their own aptitude `ngp_fighter_perks` (0.9.2):
+  Second-in-Command draws one row per aptitude and never wraps it; about 11 skills fit, and 15 in one row
+  ran past its panel. Perks have no description or author in skill_data.csv: SiC shows those as the
+  quote and its attribution ("- Legacy Station"), above the effect line that already says it all.
 - `rules.csv` hands the Ledger's dialog to `LedgerDialog` via `NGP_OpenLedger`.
 - Players see the station as **Legacy Station** (0.7.4, Andrzej disliked "the Ledger"); classes and ids
   keep the old `ledger` names so saves load. Its entity type needs the tag `has_interaction_dialog`, or the

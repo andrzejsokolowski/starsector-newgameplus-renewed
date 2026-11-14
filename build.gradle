@@ -12,6 +12,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 sourceSets.main.java.srcDirs = ['src']
+// Compile-only stand-ins for APIs of mods that are not installed here (0.9.2: the original Peerless Skills).
+// Never packaged: the jar task takes only the main classes.
+sourceSets { stubs { java.srcDirs = ['stubs'] } }
 
 repositories {
     mavenCentral()
@@ -22,8 +25,12 @@ dependencies {
     compileOnly fileTree(dir: "${starsectorPath}/starsector-core", include: '*.jar')
     // LunaLib supplies the settings page. Found wherever the mod happens to be installed.
     compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/LunaLib.jar')
-    // Peerless Skills (optional): its public API awards Peerless points. Only used when that mod is on.
-    compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/PeerlessSkills*.jar')
+    // Peerless Skills (optional, the original): its public API awards Peerless points. Its jar is no longer
+    // installed, so a stub of that API stands in at compile time.
+    compileOnly sourceSets.stubs.output
+    // Peerless Skills - Renewed (optional): built next door, or found among the installed mods.
+    compileOnly files('../Peerless Skills - Renewed/jars/PeerlessSkillsRenewed.jar')
+    compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/PeerlessSkillsRenewed.jar')
     // Achievements - Renewed checks and lists the feats. Built next door, or found among the installed mods.
     compileOnly files('../Achievements - Renewed/jars/AchievementsRenewed.jar')
     compileOnly fileTree(dir: "${starsectorPath}/mods", include: '**/AchievementsRenewed.jar')
@@ -60,6 +67,26 @@ tasks.register('checkNoForbiddenApis') {
 }
 
 tasks.named('jar') { dependsOn tasks.named('checkNoForbiddenApis') }
+
+// Every "script" a .skill file names must be one of this mod's compiled classes (0.9.2: a missing
+// Perks$FighterAptitude was caught only by reading the jar; the game stops at start without it).
+tasks.register('checkSkillScripts') {
+    dependsOn tasks.named('classes')
+    outputs.upToDateWhen { false }
+    doLast {
+        def classes = layout.buildDirectory.dir('classes/java/main').get().asFile
+        def missing = []
+        fileTree(dir: 'data/characters/skills', include: '*.skill').each { f ->
+            (f.getText('UTF-8') =~ /"script"\s*:\s*"([^"]+)"/).each { m ->
+                String name = m[1]
+                if (!name.startsWith('ngprenewed.')) return
+                if (!new File(classes, name.replace('.', '/') + '.class').exists()) missing << "${f.name}: ${name}"
+            }
+        }
+        if (!missing.isEmpty()) throw new GradleException("Skill script classes missing:\n  " + missing.join('\n  '))
+    }
+}
+tasks.named('jar') { dependsOn tasks.named('checkSkillScripts') }
 
 /** mod_info.json, the .version file and the Version Checker registration must agree. */
 tasks.register('checkVersionMetadata') {

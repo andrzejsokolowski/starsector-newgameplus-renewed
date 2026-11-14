@@ -1,0 +1,12 @@
+{
+	"id":"aptitude_ngp_fighter_perks",
+	"governingAptitude":"ngp_fighter_perks",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":0,
+			"effects":[
+				{"type":"DESCRIPTION", "script":"ngprenewed.perks.Perks$FighterAptitude"},
+			]
+		},
+	],
+}

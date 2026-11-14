@@ -173,6 +173,15 @@ public final class StoreCatalog {
                 + (names.size() - NAMES_SHOWN) + " more.";
     }
 
+    /** requiresMod may name several mods joined by | (0.9.2): the item shows when any of them is on. */
+    static boolean anyEnabled(String requiresMod) {
+        for (String modId : requiresMod.split("\\|")) {
+            String id = modId.trim();
+            if (!id.isEmpty() && Global.getSettings().getModManager().isModEnabled(id)) return true;
+        }
+        return false;
+    }
+
     /** org.json returns the string "null" for a JSON null, so empty cells are checked by hand. */
     private static String text(JSONObject row, String key) {
         if (!row.has(key) || row.isNull(key)) return "";
@@ -187,7 +196,7 @@ public final class StoreCatalog {
 
     private static StoreItem parse(JSONObject row, String id) {
         String requiresMod = text(row, "requiresMod");
-        if (!requiresMod.isEmpty() && !Global.getSettings().getModManager().isModEnabled(requiresMod)) return null;
+        if (!requiresMod.isEmpty() && !anyEnabled(requiresMod)) return null;
 
         String kind = text(row, "kind");
         String target = text(row, "target");

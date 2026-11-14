@@ -61,6 +61,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.9.2[/b]
+[list][li]With Second-in-Command, the fighter perks have their own Fighter Perks row, so the perks no longer run past the edge of the Non-Executive Skills page.[/li][li]Perk tooltips no longer show a "- Legacy Station" quote line or repeat the perk's effect above it.[/li][li]The Peerless point item now also shows with Peerless Skills - Renewed and adds the point there.[/li][/list]
 [b]0.9.1[/b]
 [list][li]Set career points for the 9 Navarchy of Tania achievements of Achievements - Renewed 0.6.0: 2 to 20 points each by the size of the quest, instead of the default 5.[/li][/list]
 [b]0.9.0[/b]

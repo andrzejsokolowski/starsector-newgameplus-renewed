@@ -1,5 +1,5 @@
 id,tab,name,description,cost,stock,requiresMod,kind,target,amount,icon
-# Store items. kind: story_points / skill_points / levels / credits / commodity / special_item / perk (target = a skill id) / peerless_point. stock -1 = no limit per game. requiresMod: a mod id or empty. Every colony item is added to Rare in code. Descriptions say plainly what the item does.,,,,,,,,,,
+# Store items. kind: story_points / skill_points / levels / credits / commodity / special_item / perk (target = a skill id) / peerless_point. stock -1 = no limit per game. requiresMod: a mod id or empty; a|b = either. Every colony item is added to Rare in code. Descriptions say plainly what the item does.,,,,,,,,,,
 sp_small,Command,Story points (3),,4,-1,,story_points,,3,graphics/ngp/item_story.png
 sp_medium,Command,Story points (10),,10,-1,,story_points,,10,graphics/ngp/item_story.png
 sp_large,Command,Story points (30),,20,-1,,story_points,,30,graphics/ngp/item_story.png
@@ -7,7 +7,7 @@ sp_huge,Command,Story points (100),,40,-1,,story_points,,100,graphics/ngp/item_s
 skill_point,Command,Skill point,,16,2,,skill_points,,1,graphics/ngp/item_skill.png
 level_one,Command,One level,,10,-1,,levels,,1,graphics/ngp/item_levels.png
 level_three,Command,Three levels,,26,-1,,levels,,3,graphics/ngp/item_levels.png
-peerless_point,Command,Peerless point,Adds 1 Peerless skill point.,20,1,peerless_skills,peerless_point,,1,graphics/ngp/item_skill.png
+peerless_point,Command,Peerless point,Adds 1 Peerless skill point.,20,1,peerless_skills|peerless_skills_renewed,peerless_point,,1,graphics/ngp/item_skill.png
 credits_small,Logistics,Credits (50000),,4,-1,,credits,,50000,graphics/ngp/item_credits.png
 credits_medium,Logistics,Credits (250000),,16,-1,,credits,,250000,graphics/ngp/item_credits.png
 credits_large,Logistics,Credits (1000000),,50,-1,,credits,,1000000,graphics/ngp/item_credits.png

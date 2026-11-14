@@ -1,6 +1,6 @@
 {
 	"id":"ngp_perk_fighter_range",
-	"governingAptitude":"ngp_perks",
+	"governingAptitude":"ngp_fighter_perks",
 	"compressHullmods":false,
 	"scope":"ALL_SHIPS",
 	"effectGroups":[
