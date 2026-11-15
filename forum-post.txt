@@ -8,6 +8,15 @@ Every level you gain and every great feat, in any save, earns career points.
 Every new game opens a store next to your starting fleet, where those points buy a head start.
 Needs LunaLib and Achievements - Renewed.
 [/b][/center]
+[spoiler=Screenshots]
+[center][img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/01-legacy-station-map.png?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/02-store-command.webp?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/03-store-shipyard.webp?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/04-store-ng-perks.webp?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/05-store-fighter-perks.webp?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/06-store-armory.webp?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-newgameplus-renewed/blob/main/screenshots/07-legacy-station-intel.webp?raw=true[/img][/center]
+[/spoiler]
 
 [hr][center][size=12pt][b]Career points[/b][/size][/center][hr]
 [list]
