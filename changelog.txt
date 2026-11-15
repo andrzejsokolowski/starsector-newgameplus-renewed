@@ -1,3 +1,6 @@
+Version 0.10.0 (2026-11-15)
+- Updated for Starsector 0.98.5a.
+
 Version 0.9.4 (2026-11-15)
 - The perk lists are now called NG+ Perks and NG+ Fighter Perks, in the store and on Second-in-Command's Non-Executive Skills page.
 

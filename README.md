@@ -67,4 +67,4 @@ When Rule Book - Renewed is installed, its active rules multiply the career poin
 
 ## Requirements
 
-LunaLib and Achievements - Renewed. Starsector 0.98a.
+LunaLib and Achievements - Renewed. Starsector 0.98.5a.
