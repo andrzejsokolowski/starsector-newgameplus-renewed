@@ -34,12 +34,17 @@ next to your starting fleet. Spend your career points there on a head start.
   one stat on one ship (hull, armor, flux capacity, flux dissipation, top speed or weapon range +10%,
   peak performance time +20%, supply use -10%); each ship can take each stat once. The work shows on
   the ship as the Hull Upgrades and Extra Ordnance Points hull mods, which cannot be removed.
-- **Perks** (once per game each, they last for that game): Deep Holds (+10% cargo, fuel and crew
-  capacity), Time Flow (+1% time flow in combat), Extra Armor (+50 armor), Last Stand (once per battle
+- **NG+ Perks** (once per game each, they last for that game): Deep Holds (+10% cargo, fuel and crew
+  capacity), Time Flow (+1% time flow in combat), Extra Armor (+50 / 100 / 200 / 300 armor on frigates,
+  destroyers, cruisers and capital ships), Last Stand (once per battle
   each ship repairs 10% of its hull instead of being destroyed), Slow Moving (+1 to the burn level that
   counts as moving slowly), Max Burn (+1), Lean Maintenance (-10% supplies per month), Combat Readiness
-  (+5% maximum), Sensor Range (+10%). With Second-in-Command they are listed on its Non-Executive
-  Skills page.
+  (+5% maximum), Sensor Range (+10%).
+- **NG+ Fighter Perks** (once per game each): Fast Refit (fighters replaced 25% faster), Fighter Speed
+  (+15% top speed and acceleration), Fighter Armor (+50%), Fighter Hull (+25%), Fighter Damage (+10%
+  weapon damage), Fighter Range (+20% engagement range).
+- With Second-in-Command, both perk lists show on its Non-Executive Skills page as the NG+ Perks and
+  NG+ Fighter Perks rows.
 - **Rare:** Omega core (80), Alpha core (25), Babylon core with Core of Babel (80), Primordial core with
   Random Assortment of Things (60), and every colony item the game knows, modded ones included
   (Tenebrian, Auroran and so on): 1 per game each, 10 to 60 points by the item's value.

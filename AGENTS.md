@@ -93,6 +93,7 @@ build when a .skill file names a class of this mod that was not compiled (the ga
   by hull size. The Fighter Perks tab (0.9.0) holds `ngp_perk_fighter_*`: effect type ALL_FIGHTERS_IN_FLEET
   changes the fighters, ALL_SHIPS_IN_FLEET the carriers (refit time, engagement range). Skill file `scope`
   only uses values vanilla files use. They are under their own aptitude `ngp_fighter_perks` (0.9.2):
+  players see the lists as "NG+ Perks" and "NG+ Fighter Perks" (store tabs and SiC rows, Andrzej 0.9.4).
   Second-in-Command draws one row per aptitude and never wraps it; about 11 skills fit, and 15 in one row
   ran past its panel. Perks have no description or author in skill_data.csv: SiC shows those as the
   quote and its attribution ("- Legacy Station"), above the effect line that already says it all.
